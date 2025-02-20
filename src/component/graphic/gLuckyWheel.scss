@@ -1,0 +1,39 @@
+.inform-danh-sach-giai-thuong {
+  position: absolute;
+  top: 100px;
+  left: 540px;
+  width: 360px;
+
+  input {
+    color: white;
+    background: transparent;
+    box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.6),
+      inset -5px -5px 15px rgba(50, 50, 50, 0.4); /* Bóng ngược */
+    border-radius: 15px; /* Bo góc mềm mại */
+    font-size: 16px;
+    width: 340px;
+    height: 50px;
+    font-weight: bold;
+  }
+}
+
+.table-winer {
+  position: absolute;
+  top: 120px;
+  left: 60px;
+  color: white;
+  border: none;
+  width: 400px;
+  border-collapse: collapse;
+  border: none;
+}
+
+
+@media (width < 768px) {
+  .table-winer {
+      top: 120px;
+      left: 50px;
+  }
+
+}
+

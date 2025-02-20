@@ -1,0 +1,15 @@
+.carousel {
+  ol {
+    // li::marker {
+    //     display:none;
+    // }
+    list-style-type: none;
+  }
+}
+
+.carousel-container {
+  width: 100%;
+  img {
+    width: 100%;
+  }
+}

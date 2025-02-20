@@ -1,0 +1,338 @@
+@use "../../../variables" as v;
+
+@font-face {
+  font-family: "phudu";
+  src: url("../../assets/font/Phudu-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "digital";
+  src: url("../../assets/font/digital-7.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.lottery-container {
+  width: v.$modal-w;
+  height: v.$modal-h;
+  font-family: "phudu", sans-serif;
+}
+.number1-grid {
+  position: absolute;
+  top: 202px;
+  left: 319px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8.5px 5.6px;
+}
+.number2-grid {
+  position: absolute;
+  top: 119px;
+  left: 95px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 8.4px 5.4px;
+
+}
+.grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: white;
+  width: 74px;
+  height: 49px;
+  font-size: 30px;
+  z-index: 4;
+}
+
+.number3-header {
+  position: absolute;
+  top: 128px;
+  left: -69px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 3.6px;
+  z-index: 1;
+
+}
+.number3-grid {
+  position: absolute;
+  top: 128px;
+  left: 83px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 8.33px 5.4px;
+        // border: 1px solid red;
+
+}
+
+.grid {
+  width: 136px;
+  height: 54px;
+
+  // border: 1px solid red;
+}
+
+.num-selected {
+  background-image: url("../../assets/images/lodesieutoc.webp");
+  background-position: -1715px -164px;
+}
+
+.grid-active {
+  background-image: url("../../assets/images/lodesieutoc.webp");
+  background-position: 1503px 760px;
+}
+
+.ghiso {
+  position: absolute;
+  top: 71px;
+  left: 100px;
+  color: gray;
+  font-size: 40px;
+  width: 835px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  // border: 1px solid red;
+}
+.ld-countdown {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 140px;
+  top: 186px;
+  left: 119px;
+  font-family: "digital", sans-serif;
+  color: white;
+  font-size: 140px;
+  // z-index: 5;
+}
+
+.result-table-num {
+  position: absolute;
+  top: 15px;
+  left: 650px;
+  color: rgb(245, 238, 179);
+  text-shadow: -2px -2px 0 rgb(7, 7, 122),
+    /* Viền phía trên bên trái */ 2px -2px 0 rgb(7, 7, 122),
+    /* Viền phía trên bên phải */ -2px 2px 0 rgb(7, 7, 122),
+    /* Viền phía dưới bên trái */ 2px 2px 0 rgb(7, 7, 122);
+  width: 380px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 32px;
+}
+.result-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.row1,
+.row2,
+.row3,
+.row4,
+.row5,
+.row6,
+.row7,
+.row8 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.row2 {
+  padding-top: 10px;
+  top: 50px;
+  left: 0px;
+}
+.row3 {
+  top: 110px;
+  display: flex;
+  flex-direction: column;
+  .row-31,
+  .row-32 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .row-32 {
+    margin-top: -10px;
+  }
+}
+.row4 {
+  top: 204px;
+}
+
+.row5 {
+  top: 265px;
+  display: flex;
+  flex-direction: column;
+  .row-51,
+  .row-52 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .row-52 {
+    margin-top: -10px;
+  }
+}
+
+.row6 {
+  top: 360px;
+}
+
+.row7 {
+  top: 420px;
+}
+.row8 {
+  top: 475px;
+  font-size: 48px; /* Kích thước chữ */
+  text-shadow: none;
+  font-weight: bold; /* Tùy chỉnh độ đậm */
+  background: linear-gradient(
+    180deg,
+    #ffeb00,
+    white
+  ); /* Gradient từ đỏ đến vàng */
+  -webkit-background-clip: text; /* Sử dụng nền cho chữ */
+  -webkit-text-fill-color: transparent; /* Làm nền chữ trong suốt để lộ gradient */
+}
+
+.o1,
+.o2,
+.o3,
+.o4,
+.o5 {
+  position: absolute;
+  top: 400px;
+  font-size: 48px; /* Kích thước chữ */
+  font-weight: bold; /* Tùy chỉnh độ đậm */
+  background: linear-gradient(
+    180deg,
+    #f700ff,
+    rgb(0, 4, 255)
+  ); /* Gradient từ đỏ đến vàng */
+  -webkit-background-clip: text; /* Sử dụng nền cho chữ */
+  -webkit-text-fill-color: transparent; /* Làm nền chữ trong suốt để lộ gradient */
+  width: 50px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // border: 1px solid red;
+}
+
+.o1 {
+  left: 7px;
+}
+
+.o2 {
+  left: 105px;
+}
+
+.o3 {
+  left: 203px;
+}
+
+.o4 {
+  left: 300px;
+}
+.o5 {
+  left: 398px;
+}
+
+.pending::before{
+  content: "..."
+}
+
+.pending {
+  display: inline-block;
+  opacity: 0;
+  animation: appear 1s infinite forwards; /* Hiệu ứng fade-in */
+    -webkit-text-fill-color: initial; /* Làm nền chữ trong suốt để lộ gradient */
+
+}
+
+@keyframes appear {
+  0%, 100% {
+    opacity: 0;
+
+  }
+  50% {
+    opacity: 1;
+
+  }
+}
+
+.result-table-wrapper {
+  position: absolute;
+  top: -70px;
+  width: 1000px;
+  height: 570px;
+  z-index: 0;
+}
+
+.result-win {
+  position: absolute;
+  top:10px;
+  left: 30px;
+  width: 460px;
+  height: 230px;
+  color: white;
+  font-size: 20px;
+  overflow: auto;
+  z-index: 5;
+  // border: 1px solid red;
+}
+
+/* Tùy chỉnh thanh cuộn */
+.result-win::-webkit-scrollbar {
+  width: 5px; /* Độ rộng thanh cuộn */
+}
+
+.result-win::-webkit-scrollbar-track {
+  background: #eaeaea; /* Màu nền đường trượt */
+  border-radius: 5px;
+}
+
+.result-win::-webkit-scrollbar-thumb {
+  background: #888; /* Màu thanh cuộn */
+  border-radius: 5px; /* Bo góc thanh cuộn */
+}
+
+.result-win::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Màu khi di chuột vào thanh cuộn */
+}
+
+.ld-sound-icon {
+  position: absolute;
+  top: 25px;
+  left: 900px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}

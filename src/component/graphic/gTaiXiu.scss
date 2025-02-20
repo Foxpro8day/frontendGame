@@ -1,0 +1,218 @@
+@use "../../variables" as v;
+
+.modal-game {
+  width: v.$modal-w;
+  height: v.$modal-h;
+  font-family: "Poppins";
+}
+
+.userIcon-right {
+  position: absolute;
+  top: 105px;
+  left: 30px;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  // border: 1px solid red;
+}
+
+.players-tai {
+  position: absolute;
+  top: 0px;
+  left: 20px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 150px;
+  font-size: 24px;
+  font-weight: bold;
+  // border: 1px solid red;
+}
+
+.userIcon-left {
+  position: absolute;
+  top: 115px;
+  left: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  // border: 1px solid red;
+}
+.players-xiu {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 150px;
+  font-size: 24px;
+  font-weight: bold;
+
+  // border: 1px solid red;
+}
+
+.tx-money-left {
+  position: absolute;
+  top: 347px;
+  left: 86px;
+  // border: 1px solid red;
+  width: 250px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}
+.tx-money-right {
+  position: absolute;
+  top: 347px;
+  right: 86px;
+  // border: 1px solid red;
+  width: 250px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.rotating-image {
+  animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); /* Bắt đầu từ 0 độ */
+  }
+  to {
+    transform: rotate(360deg); /* Xoay 360 độ */
+  }
+}
+
+.shaking-image {
+  animation: swing 2.5s ease-in-out infinite; /* Hiệu ứng lắc lư */
+  transform-origin: top right;
+}
+@keyframes swing {
+  0% {
+    transform: rotate(15deg); /* Vị trí ban đầu */
+  }
+  75% {
+    transform: rotate(30deg); /* Lắc sang phải */
+  }
+  100% {
+    transform: rotate(15deg); /* Trở về giữa */
+  }
+}
+
+.scaling-rotate-image {
+  transform-origin: bottom center;
+  animation: grow-shrink 3s ease-in-out infinite; /* Lặp vô hạn */
+}
+
+@keyframes grow-shrink {
+  0% {
+    transform: scale(1) rotate(0deg); /* Kích thước ban đầu */
+  }
+  25% {
+    transform: scale(1.02) rotate(2deg); /* Phóng to lên 1.5 lần */
+  }
+  100% {
+    transform: scale(1) rotate(0deg); /* Quay về kích thước ban đầu */
+  }
+}
+
+.scaling-image {
+  animation: scaling 3s ease-in-out infinite; /* Lặp vô hạn */
+}
+
+@keyframes scaling {
+  0% {
+    transform: scale(1) rotate(0deg); /* Kích thước ban đầu */
+  }
+  25% {
+    transform: scale(1.2) rotate(2deg); /* Phóng to lên 1.5 lần */
+  }
+  100% {
+    transform: scale(1) rotate(0deg); /* Quay về kích thước ban đầu */
+  }
+}
+
+.closeIcon:hover,
+.iIcon:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.dimed {
+  opacity: 0.5;
+  transform: scale(0.6);
+}
+
+.betIcon:hover {
+  cursor: pointer;
+}
+
+.selectedBet {
+  transform: scale(1.1);
+}
+
+.aura-img {
+  animation: blink 0.5s linear infinite;
+}
+.note-text {
+  position: absolute;
+  top: 36px;
+  left: 51px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: lighter;
+  color: whitesmoke;
+}
+
+.win {
+  position: absolute;
+  opacity: 0;
+  top: -400px;
+  left: -170px;
+  transform: translateX(-50%);
+  animation: win-effect 4s forwards;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.betAura {
+  animation: auraExpand 1s ease-out infinite; /* Animation */
+}
+
+@keyframes auraExpand {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}

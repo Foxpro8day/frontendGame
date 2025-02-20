@@ -1,0 +1,80 @@
+.afoot-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 3;
+  color: rgb(4, 147, 241);
+}
+
+.aHeader-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 50px 50px 0px 0px;
+}
+
+.aHeader-left {
+  display: flex;
+  align-items: center;
+}
+
+.aHeader-left img {
+  border-radius: 50%;
+  width: 45px;
+  border: 3px solid  rgb(4, 147, 241);
+  cursor: pointer;
+}
+
+.aHeader-right {
+  display: flex;
+  gap: 15px;
+}
+
+
+.background-icon {
+  position: relative;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(172, 238, 255);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 60px; /* ✅ Đưa tooltip lên trên */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.user-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-title {
+  white-space: nowrap;
+  font-size: 10px;
+}
+
+@media (max-width:768px) {
+  .user-group {
+    flex-direction: column;
+  }
+}

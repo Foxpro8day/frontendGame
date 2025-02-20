@@ -1,0 +1,85 @@
+.xd-lantern {
+  transform-origin: 120px 10px;
+  animation: swing-lantern 10s infinite;
+}
+
+@keyframes swing-lantern {
+  0% {
+    transform: rotate(-30deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-15deg);
+  }
+  75% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-30deg);
+  }
+}
+
+.xd-canhdao {
+  animation: canhdao 6s infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes canhdao {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  83% {
+    transform: rotate(3deg);
+  }
+  92% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.xd-bowl-mo {
+  animation: bowl 4s forwards;
+}
+
+@keyframes bowl {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  10% {
+    transform: translateX(-24px) translateY(-24px) rotate(-10deg);
+  }
+  30% {
+    transform: translateX(-24px) translateY(-24px) rotate(-20deg);
+  }
+  50% {
+    transform: translateX(-124px) translateY(-124px) rotate(-40deg);
+  }
+  70% {
+    transform: translateX(-124px) translateY(-124px) rotate(-40deg);
+  }
+  100% {
+    transform: translateX(-124px) translateY(-124px) rotate(-40deg);
+  }
+}
+
+.xd-bowl-dong {
+  animation: xd-bowl-dong-effect 0.5s forwards;
+}
+
+@keyframes xd-bowl-dong-effect {
+  0% {
+    transform: translateX(-124px) translateY(-124px) rotate(-40deg);
+  }
+  100% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+}
+
+.xd-begin {
+  cursor: pointer;
+}

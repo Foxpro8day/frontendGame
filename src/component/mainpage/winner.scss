@@ -1,0 +1,62 @@
+.winner-container {
+  margin: 30px 0;
+  width: 100vw;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  .winner-wrapper {
+    width: 80vw;
+  }
+}
+
+.winner-wrapper {
+  .table {
+    width: 90vw;
+    margin: 20px auto;
+    border-collapse: collapse;
+  }
+
+  thead {
+    background-color: #aed6fd;
+    color: #0a58ca;
+    border-radius: 10px;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
+
+  tr:hover {
+    cursor: pointer;
+  }
+
+  th {
+    text-transform: uppercase;
+    background-color: #8db5dd;
+  }
+
+  td {
+    text-transform: capitalize;
+  }
+}
+
+caption {
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #343a40;
+}
+
+@media (max-width: 768px) {
+  .winner-container {
+    .winner-wrapper {
+      width: 90vw;
+    }
+  }
+}
