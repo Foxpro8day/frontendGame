@@ -88,15 +88,6 @@ const Main = (props) => {
               </div>
             ))}
           </div>
-          {/* <div className="main-card">
-            <div className="card-row">
-              {props.cards.map((card, index) => (
-                <div key={index} className={`card card${index + 1}`}>
-                  <Cards cardName={card} />
-                </div>
-              ))}
-            </div>
-          </div> */}
         </div>
       </div>
     </>
@@ -338,10 +329,10 @@ const Achievement = (props) => {
   const achievementPos = {
     twoPair: { x: 30, y: 645, w: 710, h: 300 }, // 2 doi
     straigh: { x: 30, y: 986, w: 710, h: 300 }, // sanh
-    dragonRoyalFlush: { x: 23, y: 1295, w: 710, h: 440 }, // thung pha sanh rong
+    straightFlush: { x: 23, y: 1295, w: 710, h: 440 }, // thung pha sanh rong
     flush: { x: 30, y: 1730, w: 710, h: 300 }, // thung
-    fourKind: { x: 30, y: 2045, w: 710, h: 300 }, // tu quy
-    threeKind: { x: 775, y: 60, w: 710, h: 300 }, // tam co
+    fourOfAKind: { x: 30, y: 2045, w: 710, h: 300 }, // tu quy
+    threeOfAKind: { x: 775, y: 60, w: 710, h: 300 }, // tam co
     aPair: { x: 805, y: 395, w: 710, h: 300 }, // doi a
     kPair: { x: 805, y: 730, w: 710, h: 300 }, // doi k
     qPair: { x: 805, y: 1055, w: 710, h: 300 }, // doi q
@@ -358,13 +349,13 @@ const Achievement = (props) => {
         onClick={props.onClick}
         style={{
           position: "absolute",
-          top: "100px",
-          left: "50%",
-          transform: "translateX(-50%)",
+          top: "10px",
+          left: "160px",
           backgroundImage: `url(${achievementImg})`,
           backgroundPosition: `-${posImg.x}px -${posImg.y}px`,
           width: `${posImg.w}px`,
           height: `${posImg.h}px`,
+          scale: ".5",
           // border: "1px solid red",
         }}
       ></div>

@@ -73,17 +73,6 @@ const FooterMenu = () => {
           <div className="aHeader-left" onClick={() => navigate("/user")}>
             <div className="user-group">
               <img src={avatar} alt="" />
-              <div className="aHeader-name ms-2">Foxpro</div>
-            </div>
-            <div className="point-group ms-3">
-              <div className="wallet ">
-                <i className="fa-solid fa-wallet me-1"></i>
-                {userData.credit}
-              </div>
-              <div className="diamon">
-                <i className="fa-regular fa-gem me-1"></i>
-                {userData.point}
-              </div>
             </div>
           </div>
           <div className="aHeader-right">

@@ -1,19 +1,49 @@
-// @keyframes moveDown {
-//   0% {
-//     transform: translateY(0);
-//     opacity: 1;
-//   }
-//   100% {
-//     transform: translateY(50px);
-//     opacity: 0;
-//   }
-// }
+.p-money {
+    position: absolute;
+    top: 100px;
+    left: 30px;
+    color: white;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
-// .card {
-//   position: absolute;
-//   transition: transform 0.5s ease-in-out;
-// }
+.arrow-updown {
+    rotate: 90deg;
+    cursor: pointer;
+}
 
-// .card.rolling {
-//   animation: moveDown 0.5s forwards;
-// }
+.modal-transfer {
+    position: absolute;
+    top: 90px;
+    left: 150px;
+    color: white;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    // border: 1px solid red;
+    input {
+        margin-top: 5px;
+        height: 30px;
+    }
+
+}
+
+.tf-title i {
+    color: black;
+}
+
+.tf-source {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    input {
+        width: 80px;
+    }
+}

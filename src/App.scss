@@ -1,11 +1,14 @@
 @use "./variables" as v;
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
+html {
+    background-color: #d1d1d1;
+}
 body {
   display: flex;
   align-items: center;
   justify-content: center;
   overflow-x: hidden;
+  background-color: #d1d1d1!important;
 }
 
 .App {
@@ -19,3 +22,4 @@ body {
 .show {
   display: block!important;
 }
+

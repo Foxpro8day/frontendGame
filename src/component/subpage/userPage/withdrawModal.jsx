@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import api from "../../../api/axiosConfig"; // ✅ Import axios đã config
 import { AuthContext } from "../../Context/AuthContext"; // ✅ Lấy user từ context
-import { XImg } from "../../graphic/gLode";
 import "./withdrawModal.scss";
 
 const WithdrawForm = ({ onClose }) => {
@@ -71,9 +70,8 @@ const WithdrawForm = ({ onClose }) => {
   };
 
   return (
-    <div className="p-6 max-w-md mx-auto bg-white shadow-lg rounded-lg border border-gray-200">
-      <form onSubmit={handleSubmit} className="space-y-3">
-        <XImg left={330} onClick={onClose} />
+    <div className="withdraw-container">
+      <div onSubmit={handleSubmit} className="space-y-3">
         <h2 className="text-2xl font-bold mb-4 text-center">Rút Tiền</h2>
 
         {message && (
@@ -94,7 +92,7 @@ const WithdrawForm = ({ onClose }) => {
           value={formData.amount}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded no-spinner"
+          className=" p-2 border rounded no-spinner"
           placeholder="Nhập số tiền cần rút"
         />
 
@@ -105,7 +103,7 @@ const WithdrawForm = ({ onClose }) => {
           value={formData.bankName}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded"
+          className=" p-2 border rounded"
           placeholder="Tên ngân hàng"
         />
 
@@ -116,7 +114,7 @@ const WithdrawForm = ({ onClose }) => {
           value={formData.accountNumber}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded"
+          className=" p-2 border rounded"
           placeholder="Số tài khoản nhận tiền"
         />
 
@@ -126,12 +124,12 @@ const WithdrawForm = ({ onClose }) => {
           name="accountName"
           value={formData.accountName}
           readOnly
-          className="w-full p-2 border rounded bg-gray-100"
+          className=" p-2 border rounded "
         />
 
         <button
           type="submit"
-          className={`w-full py-2 px-4 rounded text-white ${
+          className={` py-2 mt-2 rounded text-white ${
             loading
               ? "bg-gray-500 cursor-not-allowed"
               : "bg-green-600 hover:bg-green-700"
@@ -140,7 +138,7 @@ const WithdrawForm = ({ onClose }) => {
         >
           {loading ? "Đang xử lý..." : "Xác nhận rút tiền"}
         </button>
-      </form>
+      </div>
     </div>
   );
 };

@@ -9,11 +9,13 @@
 
 .aHeader-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   background-color: rgb(255, 255, 255);
   padding: 10px;
   border-radius: 50px 50px 0px 0px;
+      box-shadow: 5px -2px 5px rgba(0, 0, 0, 0.8)
+
 }
 
 .aHeader-left {
@@ -26,6 +28,8 @@
   width: 45px;
   border: 3px solid  rgb(4, 147, 241);
   cursor: pointer;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8)
+
 }
 
 .aHeader-right {
@@ -44,6 +48,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8)
+
 }
 
 .tooltip {
@@ -66,6 +72,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  padding-right: 20px;
 }
 
 .menu-title {

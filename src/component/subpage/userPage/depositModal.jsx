@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import api from "../../../api/axiosConfig";
 import { AuthContext } from "../../Context/AuthContext"; // ✅ Import AuthContext
-import { XImg } from "../../graphic/gLode";
 const DepositForm = ({ onClose }) => {
   const { user, isLoggedIn } = useContext(AuthContext); // ✅ Lấy thông tin user từ context
   const [banks, setBanks] = useState([]);
@@ -79,9 +78,9 @@ const DepositForm = ({ onClose }) => {
   };
 
   return (
-    <div className="p-6 max-w-md mx-auto bg-white shadow-lg rounded-lg border border-gray-200">
-      <form onSubmit={handleSubmit} className="space-y-3">
-        <XImg left={330} onClick={onClose} />
+    <div className="deposite-container">
+      <div onSubmit={handleSubmit} className="">
+        {/* <XImg left={330} onClick={onClose} /> */}
         <h2 className="text-2xl font-bold mb-4 text-center">Nạp Tiền</h2>
         {/* Chọn ngân hàng */}
         <label className="block">Chọn ngân hàng:</label>
@@ -90,7 +89,7 @@ const DepositForm = ({ onClose }) => {
           value={selectedBank}
           onChange={handleBankChange}
           required
-          className="w-full p-2 border rounded"
+          className="p-2 border rounded"
         >
           <option value="">-- Chọn ngân hàng --</option>
           {banks.map((bank, index) => (
@@ -107,7 +106,7 @@ const DepositForm = ({ onClose }) => {
           name="accountNumber"
           value={formData.accountNumber}
           readOnly
-          className="w-full p-2 border rounded bg-gray-100"
+          className="p-2  mt-2 "
         />
 
         {/* Tên tài khoản */}
@@ -117,7 +116,7 @@ const DepositForm = ({ onClose }) => {
           name="accountName"
           value={formData.accountName}
           readOnly
-          className="w-full p-2 border rounded bg-gray-100"
+          className=" p-2   "
         />
 
         {/* Chi nhánh */}
@@ -127,7 +126,7 @@ const DepositForm = ({ onClose }) => {
           name="branch"
           value={formData.branch}
           readOnly
-          className="w-full p-2 border rounded bg-gray-100"
+          className=" p-2   "
         />
 
         {/* Số tiền */}
@@ -138,7 +137,7 @@ const DepositForm = ({ onClose }) => {
           value={formData.amount}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded"
+          className=" p-2 border rounded"
         />
 
         {/* Người gửi */}
@@ -148,26 +147,23 @@ const DepositForm = ({ onClose }) => {
           name="sender"
           value={formData.sender}
           readOnly
-          className="w-full p-2 border rounded bg-gray-100"
+          className=" p-2 border rounded "
         />
 
         {/* Ghi chú */}
         <label className="block">Ghi chú:</label>
-        <textarea
+        <input
           name="note"
           value={formData.note}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
-        ></textarea>
+          className=" p-2 border rounded"
+        ></input>
 
         {/* Nút nạp tiền */}
-        <button
-          type="submit"
-          className="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700"
-        >
+        <button type="submit" className=" text-white py-2 mt-2">
           Xác nhận nạp tiền
         </button>
-      </form>
+      </div>
     </div>
   );
 };

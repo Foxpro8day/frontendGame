@@ -49,6 +49,21 @@
   flex-direction: column;
 }
 
+.win-effect {
+  position: absolute;
+  top: 185px;
+  left: 74px;
+  width: 868px;
+  height: 223px;
+  border-radius: 30px;
+  border: 10px solid rgb(6, 221, 96);
+  animation: blink .5s infinite;
+}
+
+@keyframes blinkEfect{
+
+}
+
 .card-row {
   display: flex;
   flex-direction: row;
