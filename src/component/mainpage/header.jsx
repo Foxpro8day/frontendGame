@@ -67,7 +67,7 @@ const Header = () => {
 
       {/* Header Content */}
       <div className={headerClass}>
-        <div className="logo">
+        <div className={isMobile ? "logo-mobile" : "logo"}>
           <img src={logoImg} alt="logo" className="logo-img" />
         </div>
         {!isLoggedIn ? (

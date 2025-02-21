@@ -10,11 +10,14 @@ import Page404 from "./component/subpage/page404/Page404.jsx";
 import UserPage from "./component/subpage/userPage/userPage.jsx";
 import { SoundProvider } from "./component/utils/soundEffect.jsx";
 import Chat from "./component/subpage/chatApp/ChatApp.jsx";
+import { ToastContainer, toast } from "react-toastify"; // ✅ Import Toastify
+import "react-toastify/dist/ReactToastify.css"; // ✅ Import CSS Toastify
 
 function App() {
   return (
     <AuthProvider>
       <SoundProvider>
+        <ToastContainer position="top-right" autoClose={3000} />
         <Router>
           <Routes>
             {/* <Route path="/" element={<Minigame />} /> */}

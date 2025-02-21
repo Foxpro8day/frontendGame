@@ -16,6 +16,7 @@
   width: 260px;
   height: 42px;
   border: 3px solid rgb(0, 140, 255);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 50px;
   box-shadow: 5px 5px 5px rgba(0,0,0,.6);
 }
@@ -27,11 +28,22 @@
   transition: width 0.3s ease-in-out;
   animation: fadeIn 1.5s ease-in-out infinite alternate;
   color: rgb(0, 140, 255);
-  -webkit-text-stroke: .5px white;
   white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.loading-text {
+  position: absolute;
+  top: -1px;
+  left: 0px;
+  width: 255px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
 }
 
 .loading-percentage {

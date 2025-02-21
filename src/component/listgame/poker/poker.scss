@@ -1,49 +1,57 @@
-.p-money {
-    position: absolute;
-    top: 100px;
-    left: 30px;
-    color: white;
-    width: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.arrow-updown {
-    rotate: 90deg;
-    cursor: pointer;
-}
-
 .modal-transfer {
-    position: absolute;
-    top: 90px;
-    left: 150px;
-    color: white;
-    width: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    // border: 1px solid red;
-    input {
-        margin-top: 5px;
-        height: 30px;
-    }
-
+  position: absolute;
+  top: 90px;
+  left: 150px;
+  color: white;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  // border: 1px solid red;
+  input {
+    margin-top: 5px;
+    height: 30px;
+  }
 }
 
 .tf-title i {
-    color: black;
+  color: black;
 }
 
 .tf-source {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    input {
-        width: 80px;
-    }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  input {
+    width: 80px;
+  }
 }
+
+.pr-mascot {
+  position: absolute;
+  top: -340px;
+  left: 440px;
+  scale: 0.3;
+}
+
+.pr-money {
+  color: rgb(255, 255, 255);
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  // border: 1px solid red;
+  font-size: 50px;
+  position: absolute;
+  top: 90px;
+  left: 310px;
+
+}
+
+
+
+

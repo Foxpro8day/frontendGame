@@ -38,6 +38,7 @@
     justify-content: center;
     position: relative;
     z-index: 2;
+    margin-top: -7px;
     .logo {
       position: absolute;
       display: flex;
@@ -127,7 +128,7 @@
 
 .logo-mobile {
   position: absolute;
-  top: -50px;
+  top: -45px;
   display: flex;
   align-items: center;
   justify-content: center;

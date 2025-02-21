@@ -13,7 +13,7 @@
   height: 100vh;
   width: 100vw;
 
-    // box-shadow: 10px 10px 10px rgba(4, 147, 241, 0.5);
+  // box-shadow: 10px 10px 10px rgba(4, 147, 241, 0.5);
 }
 
 .group-icon-userpage {
@@ -72,9 +72,12 @@
   margin: 5px;
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  position: relative;
   i {
     color: rgb(4, 147, 241);
+  }
+  .iconmodal {
+    position: absolute;
   }
   color: rgb(3, 64, 105);
   cursor: pointer;
@@ -83,4 +86,78 @@
 .info-field-modal {
   display: flex;
   flex-direction: column;
+}
+
+.conect8d-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-money {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  .trans-radio {
+    width: 20px;
+  }
+}
+
+.pr-check-icon {
+  // border: 1px solid red;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgb(40, 167, 1);
+  box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.5);
+  font-size: 20px;
+}
+
+.pr-x-icon {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgb(167, 1, 1);
+  box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.5);
+  font-size: 20px;
+  display: flex;
+}
+
+.trans-input {
+  width: 200px;
+  height: 40px;
+  margin: 5px 0;
+}
+
+.trans1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.trans-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  width: 200px;
+  height: 40px;
+
+  .trans-x {
+    background: rgb(145, 0, 0);
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  .trans-check {
+    background: rgb(0, 141, 7);
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+  }
 }

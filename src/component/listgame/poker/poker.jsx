@@ -3,7 +3,14 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { XImg } from "../../graphic/gLode";
 import { Achievement, Main, Roll, Rolling } from "../../graphic/gPoker";
+import chibiImg from "../../assets/images/chibi2.png"
 import "./poker.scss";
+import io from "socket.io-client";
+
+// Kết nối với server Socket.io
+const socket = io(process.env.REACT_APP_URL_SITE, {
+  withCredentials: true, // Nếu server yêu cầu gửi cookie
+});
 
 const Poker = ({ onClose }) => {
   const { user, isLoggedIn, logout } = useContext(AuthContext);
@@ -19,9 +26,27 @@ const Poker = ({ onClose }) => {
   const [winAmount, setWinAmount] = useState(0); // Lưu số tiền thắng
   const [showWinEffect, setShowWinEffect] = useState(false); // ✅ State hiệu ứng
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isShowModalTransfer, setIsShowModalTranfer] = useState(false);
-  const [option, setOption] = useState("1");
-  const [amount, setAmount] = useState("");
+  const [point, setPoint] = useState(user.point);
+  const userId = user.id
+
+  useEffect(() => {
+    if (!userId) return;
+
+    // Khi vào game, tham gia vào room riêng của user
+    socket.emit("joinRoom", { userId });
+
+    // Lắng nghe sự kiện cập nhật điểm số
+    socket.on("updatePoint", (data) => {
+      console.log("📩 Nhận update từ server:", data);
+      setPoint(data.point); // Cập nhật điểm trên UI
+    });
+
+    return () => {
+      // Cleanup khi component unmount
+      socket.emit("leaveRoom", { userId });
+      socket.off("updatePoint");
+    };
+  }, [userId]);
 
   useEffect(() => {
     if (isLoggedIn && user) {
@@ -59,36 +84,14 @@ const Poker = ({ onClose }) => {
           setTimeout(() => setShowWinEffect(false), 2000); // Ẩn sau 2 giây
         }
       } catch (error) {
-        console.error("Lỗi khi quay bài:", error);
+        console.error("Lỗi khi quay bài:", error.response.data);
       }
 
       setIsRolling(false);
     }, 3900); // Giả lập thời gian quay bài
   };
 
-  const handleModalTransfer = () => {
-    setIsShowModalTranfer(!isShowModalTransfer);
-  };
   
-  const handleTransfer = async () => {
-    if (!amount || amount <= 0) {
-      alert("Vui lòng nhập số tiền hợp lệ.");
-      return;
-    }
-
-    try {
-      const response = await axios.post(
-        "https://your-server.com/api/transfer",
-        { value: option, amount: Number(amount) },
-        { withCredentials: true }
-      );
-
-      alert(`Chuyển đổi thành công: ${response.data.message}`);
-    } catch (error) {
-      alert(`Lỗi: ${error.response?.data?.error || "Có lỗi xảy ra."}`);
-    }
-  };
-
   return (
     <div>
       <Main
@@ -96,60 +99,18 @@ const Poker = ({ onClose }) => {
         cards={hand}
         isRolling={isRolling}
       />
-      <XImg onClick={onClose} top={60} left={940} />
-      <div className="p-money">
-        <div className="diamond">
-          <i class="fa-regular fa-gem me-2"></i>
-          {user.point}
-        </div>
-        <i
-          class="fa-solid fa-arrow-right-arrow-left arrow-updown"
-          onClick={handleModalTransfer}
-        ></i>{" "}
-        <div className="diamond">
-          <i class="fa-solid fa-leaf me-2"></i>
-          {user.point}
-        </div>
+      <div className="pr-mascot">
+        <img src={chibiImg} />{" "}
       </div>
+      <div className="pr-money">{point.toLocaleString("vi-VN")}</div>
+      <XImg onClick={onClose} top={60} left={940} />
+      
       <div className="pr-rolling">
         {isRolling ? <Rolling /> : <Roll onClick={handleRoll} />}
       </div>
       {showWinEffect && <div className="win-effect"></div>}
       {showWinEffect && <Achievement name={handRank} />}
-      {console.log(isShowModalTransfer)}
-      {isShowModalTransfer && (
-        <>
-          <div className="modal-transfer">
-            <label for="options">Đổi tiền</label>
-            <select
-              id="options"
-              value={option}
-              onChange={(e) => setOption(e.target.value)}
-            >
-              <option value="1">Lá đổi kim cương</option>
-              <option value="2">Kim cương đổi lá</option>
-            </select>
-            <div className="tf-source">
-              <input
-                className=""
-                type="number"
-                min="1"
-                step="1"
-                value={amount}
-                onChange={(e) =>
-                  setAmount(e.target.value.replace(/[^0-9]/g, ""))
-                }
-              ></input>
-
-              <i class="fa-solid fa-check" onClick={() => handleTransfer()}></i>
-              <i
-                class="fa-solid fa-xmark ms-3"
-                onClick={() => setIsShowModalTranfer(false)}
-              ></i>
-            </div>
-          </div>
-        </>
-      )}
+      
     </div>
   );
 };

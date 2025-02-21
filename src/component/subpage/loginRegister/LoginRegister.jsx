@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios"; // ✅ Import Axios
+import { toast } from "react-toastify"; // ✅ Import Toastify
 import "./LoginRegister.scss";
 
 const desUrl = process.env.REACT_APP_URL_SITE;
@@ -16,10 +18,17 @@ const LoginRegister = ({ select, onClick }) => {
     password: "",
   });
 
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState("");
   const [selectInform, setSelectInform] = useState(select);
+
+  // Hàm hiển thị thông báo
+  const showToast = (message, type = "success") => {
+    if (type === "error") {
+      toast.error(message);
+    } else {
+      toast.success(message);
+    }
+  };
 
   // Xử lý input thay đổi cho đăng ký
   const handleChangeRegister = (e) => {
@@ -39,11 +48,9 @@ const LoginRegister = ({ select, onClick }) => {
     setFormLoginData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // ✅ Xử lý Đăng Ký
+  // ✅ Xử lý Đăng Ký với Axios
   const handleRegister = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
 
     if (
       !formRegisterData.username ||
@@ -51,78 +58,64 @@ const LoginRegister = ({ select, onClick }) => {
       !formRegisterData.password ||
       !formRegisterData.confirmPassword
     ) {
-      setError("⚠️ Vui lòng điền đầy đủ thông tin!");
+      showToast("⚠️ Vui lòng điền đầy đủ thông tin!", "error");
       return;
     }
 
     if (formRegisterData.phone.length !== 10) {
-      setError("⚠️ Số điện thoại phải đúng 10 số.");
+      showToast("⚠️ Số điện thoại phải đúng 10 số.", "error");
       return;
     }
 
     if (formRegisterData.password !== formRegisterData.confirmPassword) {
-      setError("❌ Mật khẩu xác nhận không khớp!");
+      showToast("❌ Mật khẩu xác nhận không khớp!", "error");
       return;
     }
 
     setLoading(true);
     try {
-      const response = await fetch(`${desUrl}/user/register`, {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formRegisterData),
-      });
+      const response = await axios.post(
+        `${desUrl}/user/register`,
+        formRegisterData,
+        { withCredentials: true }
+      );
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setSuccess("✅ Đăng ký thành công! Hãy đăng nhập.");
-        setError("");
-        setSelectInform("login"); // Chuyển về form đăng nhập sau khi đăng ký thành công
-      } else {
-        setError(data.message || "❌ Thất bại! Kiểm tra lại thông tin.");
-      }
+      showToast("✅ Đăng ký thành công! Hãy đăng nhập.");
+      setSelectInform("login"); // Chuyển về form đăng nhập sau khi đăng ký thành công
     } catch (error) {
-      console.error("Lỗi kết nối:", error);
-      setError("❌ Lỗi máy chủ! Hãy thử lại sau.");
+      showToast(
+        error.response?.data?.message || "❌ Thất bại! Kiểm tra lại thông tin.",
+        "error"
+      );
     } finally {
       setLoading(false);
     }
   };
 
-  // ✅ Xử lý Đăng Nhập
+  // ✅ Xử lý Đăng Nhập với Axios
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
 
     if (!formLoginData.username || !formLoginData.password) {
-      setError("⚠️ Vui lòng nhập tài khoản và mật khẩu!");
+      showToast("⚠️ Vui lòng nhập tài khoản và mật khẩu!", "error");
       return;
     }
 
     setLoading(true);
     try {
-      const response = await fetch(`${desUrl}/user/login`, {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formLoginData),
+      const response = await axios.post(`${desUrl}/user/login`, formLoginData, {
+        withCredentials: true,
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setSuccess("✅ Đăng nhập thành công!");
-        setError("");
+      showToast("✅ Đăng nhập thành công!");
+      setTimeout(() => {
         window.location.reload(); // Reload trang sau khi đăng nhập thành công
-      } else {
-        setError(data.message || "❌ Thất bại! Kiểm tra lại thông tin.");
-      }
+      }, 2000);
     } catch (error) {
-      console.error("Lỗi kết nối:", error);
-      setError("❌ Lỗi máy chủ! Hãy thử lại sau.");
+      showToast(
+        error.response?.data?.message || "❌ Thất bại! Kiểm tra lại thông tin.",
+        "error"
+      );
     } finally {
       setLoading(false);
     }
@@ -230,9 +223,6 @@ const LoginRegister = ({ select, onClick }) => {
             )}
           </div>
         </form>
-
-        {error && <p className="error-message">{error}</p>}
-        {success && <p className="success-message">{success}</p>}
       </div>
     </div>
   );
