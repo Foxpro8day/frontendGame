@@ -82,7 +82,7 @@ const Main = (props) => {
                     key={cardIndex}
                     className={`card card-${rowIndex + 1}-${cardIndex + 1}`}
                   >
-                    <Cards cardName={card} />
+                    <CardsBlur cardName={card} />
                   </div>
                 ))}
               </div>

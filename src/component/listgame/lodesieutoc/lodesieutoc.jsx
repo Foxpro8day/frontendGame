@@ -1836,151 +1836,151 @@ const LotteryGame = ({ onClose }) => {
                 <div className="row-31">
                   <div
                     className={`result-row1-item ${
+                      countdown < 24 ? "" : "pending"
+                    }`}
+                  >
+                    {countdown < 24 ? `${allNumbers[0]?.g5?.[0]}` : ""}
+                  </div>
+                  <div
+                    className={`result-row1-item ${
                       countdown < 23 ? "" : "pending"
                     }`}
                   >
-                    {countdown < 23 ? `${allNumbers[0]?.g5?.[0]}` : ""}
+                    {countdown < 23 ? `${allNumbers[0]?.g5?.[1]}` : ""}
                   </div>
                   <div
                     className={`result-row1-item ${
                       countdown < 22 ? "" : "pending"
                     }`}
                   >
-                    {countdown < 22 ? `${allNumbers[0]?.g5?.[1]}` : ""}
-                  </div>
-                  <div
-                    className={`result-row1-item ${
-                      countdown < 21 ? "" : "pending"
-                    }`}
-                  >
-                    {countdown < 21 ? `${allNumbers[0]?.g5?.[2]}` : ""}
+                    {countdown < 22 ? `${allNumbers[0]?.g5?.[2]}` : ""}
                   </div>
                 </div>
                 <div className="row-32">
                   <div
                     className={`result-row1-item ${
+                      countdown < 21 ? "" : "pending"
+                    }`}
+                  >
+                    {countdown < 21 ? `${allNumbers[0]?.g5?.[3]}` : ""}
+                  </div>
+                  <div
+                    className={`result-row1-item ${
                       countdown < 20 ? "" : "pending"
                     }`}
                   >
-                    {countdown < 20 ? `${allNumbers[0]?.g5?.[3]}` : ""}
+                    {countdown < 20 ? `${allNumbers[0]?.g5?.[4]}` : ""}
                   </div>
                   <div
                     className={`result-row1-item ${
                       countdown < 19 ? "" : "pending"
                     }`}
                   >
-                    {countdown < 19 ? `${allNumbers[0]?.g5?.[4]}` : ""}
-                  </div>
-                  <div
-                    className={`result-row1-item ${
-                      countdown < 18 ? "" : "pending"
-                    }`}
-                  >
-                    {countdown < 18 ? `${allNumbers[0]?.g5?.[5]}` : ""}
+                    {countdown < 19 ? `${allNumbers[0]?.g5?.[5]}` : ""}
                   </div>
                 </div>
               </div>
               <div className="result-row row4">
                 <div
                   className={`result-row1-item ${
+                    countdown < 18 ? "" : "pending"
+                  }`}
+                >
+                  {countdown < 18 ? `${allNumbers[0]?.g4?.[0]}` : ""}
+                </div>
+                <div
+                  className={`result-row1-item ${
                     countdown < 17 ? "" : "pending"
                   }`}
                 >
-                  {countdown < 17 ? `${allNumbers[0]?.g4?.[0]}` : ""}
+                  {countdown < 17 ? `${allNumbers[0]?.g4?.[1]}` : ""}
                 </div>
                 <div
                   className={`result-row1-item ${
                     countdown < 16 ? "" : "pending"
                   }`}
                 >
-                  {countdown < 16 ? `${allNumbers[0]?.g4?.[1]}` : ""}
+                  {countdown < 16 ? `${allNumbers[0]?.g4?.[2]}` : ""}
                 </div>
                 <div
                   className={`result-row1-item ${
                     countdown < 15 ? "" : "pending"
                   }`}
                 >
-                  {countdown < 15 ? `${allNumbers[0]?.g4?.[2]}` : ""}
-                </div>
-                <div
-                  className={`result-row1-item ${
-                    countdown < 14 ? "" : "pending"
-                  }`}
-                >
-                  {countdown < 14 ? `${allNumbers[0]?.g4?.[3]}` : ""}
+                  {countdown < 15 ? `${allNumbers[0]?.g4?.[3]}` : ""}
                 </div>
               </div>
               <div className="result-row row5">
                 <div className="row-51">
                   <div
                     className={`result-row1-item ${
+                      countdown < 14 ? "" : "pending"
+                    }`}
+                  >
+                    {countdown < 14 ? `${allNumbers[0]?.g3?.[0]}` : ""}
+                  </div>
+                  <div
+                    className={`result-row1-item ${
                       countdown < 13 ? "" : "pending"
                     }`}
                   >
-                    {countdown < 13 ? `${allNumbers[0]?.g3?.[0]}` : ""}
+                    {countdown < 13 ? `${allNumbers[0]?.g3?.[1]}` : ""}
                   </div>
                   <div
                     className={`result-row1-item ${
                       countdown < 12 ? "" : "pending"
                     }`}
                   >
-                    {countdown < 12 ? `${allNumbers[0]?.g3?.[1]}` : ""}
-                  </div>
-                  <div
-                    className={`result-row1-item ${
-                      countdown < 11 ? "" : "pending"
-                    }`}
-                  >
-                    {countdown < 11 ? `${allNumbers[0]?.g3?.[2]}` : ""}
+                    {countdown < 12 ? `${allNumbers[0]?.g3?.[2]}` : ""}
                   </div>
                 </div>
                 <div className="row-52">
                   <div
                     className={`result-row1-item ${
+                      countdown < 11 ? "" : "pending"
+                    }`}
+                  >
+                    {countdown < 11 ? `${allNumbers[0]?.g3?.[3]}` : ""}
+                  </div>
+                  <div
+                    className={`result-row1-item ${
                       countdown < 10 ? "" : "pending"
                     }`}
                   >
-                    {countdown < 10 ? `${allNumbers[0]?.g3?.[3]}` : ""}
+                    {countdown < 10 ? `${allNumbers[0]?.g3?.[4]}` : ""}
                   </div>
                   <div
                     className={`result-row1-item ${
                       countdown < 9 ? "" : "pending"
                     }`}
                   >
-                    {countdown < 9 ? `${allNumbers[0]?.g3?.[4]}` : ""}
-                  </div>
-                  <div
-                    className={`result-row1-item ${
-                      countdown < 8 ? "" : "pending"
-                    }`}
-                  >
-                    {countdown < 8 ? `${allNumbers[0]?.g3?.[5]}` : ""}
+                    {countdown < 9 ? `${allNumbers[0]?.g3?.[5]}` : ""}
                   </div>
                 </div>
               </div>
               <div className="result-row row6">
                 <div
                   className={`result-row1-item ${
-                    countdown < 7 ? "" : "pending"
+                    countdown < 8 ? "" : "pending"
                   }`}
                 >
-                  {countdown < 7 ? `${allNumbers[0]?.g2?.[0]}` : ""}
+                  {countdown < 8 ? `${allNumbers[0]?.g2?.[0]}` : ""}
                 </div>
                 <div
                   className={`result-row1-item ${
-                    countdown < 6 ? "" : "pending"
+                    countdown < 7 ? "" : "pending"
                   }`}
                 >
-                  {countdown < 6 ? `${allNumbers[0]?.g2?.[1]}` : ""}
+                  {countdown < 7 ? `${allNumbers[0]?.g2?.[1]}` : ""}
                 </div>
               </div>
               <div className="result-row row7">
                 <div
                   className={`result-row1-item ${
-                    countdown < 5 ? "" : "pending"
+                    countdown < 6 ? "" : "pending"
                   }`}
                 >
-                  {countdown < 5 ? `${allNumbers[0]?.g1?.[0]}` : ""}
+                  {countdown < 6 ? `${allNumbers[0]?.g1?.[0]}` : ""}
                 </div>
               </div>
               <div className="result-row row8">
@@ -1995,19 +1995,19 @@ const LotteryGame = ({ onClose }) => {
             </div>
             <div className="quay-so-db">
               <div className="o1">
-                {countdown < 4 ? `${splitGDB[0]}` : `${randomNumber[0]}`}
+                {countdown < 5 ? `${splitGDB[0]}` : `${randomNumber[0]}`}
               </div>
               <div className="o2">
-                {countdown < 3 ? `${splitGDB[1]}` : `${randomNumber[1]}`}
+                {countdown < 4 ? `${splitGDB[1]}` : `${randomNumber[1]}`}
               </div>
               <div className="o3">
-                {countdown < 2 ? `${splitGDB[2]}` : `${randomNumber[2]}`}
+                {countdown < 3 ? `${splitGDB[2]}` : `${randomNumber[2]}`}
               </div>
               <div className="o4">
-                {countdown < 1 ? `${splitGDB[3]}` : `${randomNumber[3]}`}
+                {countdown < 2 ? `${splitGDB[3]}` : `${randomNumber[3]}`}
               </div>
               <div className="o5">
-                {countdown === 0 ? `${splitGDB[4]}` : `${randomNumber[4]}`}
+                {countdown < 1 ? `${splitGDB[4]}` : `${randomNumber[4]}`}
               </div>
             </div>
           </div>

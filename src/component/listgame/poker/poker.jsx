@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import io from "socket.io-client";
+import chibiImg from "../../assets/images/chibi2.png";
 import { AuthContext } from "../../Context/AuthContext";
 import { XImg } from "../../graphic/gLode";
 import { Achievement, Main, Roll, Rolling } from "../../graphic/gPoker";
-import chibiImg from "../../assets/images/chibi2.png"
 import "./poker.scss";
-import io from "socket.io-client";
 
 // Kết nối với server Socket.io
 const socket = io(process.env.REACT_APP_URL_SITE, {
@@ -14,6 +15,12 @@ const socket = io(process.env.REACT_APP_URL_SITE, {
 
 const Poker = ({ onClose }) => {
   const { user, isLoggedIn, logout } = useContext(AuthContext);
+  const anonymousUser = {
+    id: "anonymousUser",
+    point: 0,
+    // Thêm các thuộc tính khác nếu cần
+  };
+  const effectiveUser = user || anonymousUser;
   const [isRolling, setIsRolling] = useState(false);
   const [hand, setHand] = useState([
     "tenHearts",
@@ -26,8 +33,9 @@ const Poker = ({ onClose }) => {
   const [winAmount, setWinAmount] = useState(0); // Lưu số tiền thắng
   const [showWinEffect, setShowWinEffect] = useState(false); // ✅ State hiệu ứng
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [point, setPoint] = useState(user.point);
-  const userId = user.id
+  const [point, setPoint] = useState(effectiveUser.point || 0);
+
+  const userId = effectiveUser.id;
 
   useEffect(() => {
     if (!userId) return;
@@ -49,15 +57,18 @@ const Poker = ({ onClose }) => {
   }, [userId]);
 
   useEffect(() => {
-    if (isLoggedIn && user) {
+    if (isLoggedIn && effectiveUser) {
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
     }
-  }, [isLoggedIn, user]);
+  }, [isLoggedIn, effectiveUser]);
 
   const handleRoll = async () => {
-    if (!isAuthenticated) return;
+    if (!isAuthenticated) {
+      toast.error("Bạn chưa đăng nhập!");
+      return;
+    }
 
     setIsRolling(true);
 
@@ -66,7 +77,7 @@ const Poker = ({ onClose }) => {
         const response = await axios.post(
           `${process.env.REACT_APP_URL_SITE}/poker/spin`,
           {
-            userId: user.id, // Thay ID người dùng bằng giá trị thực tế
+            userId: effectiveUser.id, // Thay ID người dùng bằng giá trị thực tế
             betAmount: 1000, // Giá trị cược
           }
         );
@@ -91,7 +102,6 @@ const Poker = ({ onClose }) => {
     }, 3900); // Giả lập thời gian quay bài
   };
 
-  
   return (
     <div>
       <Main
@@ -104,13 +114,12 @@ const Poker = ({ onClose }) => {
       </div>
       <div className="pr-money">{point.toLocaleString("vi-VN")}</div>
       <XImg onClick={onClose} top={60} left={940} />
-      
+
       <div className="pr-rolling">
         {isRolling ? <Rolling /> : <Roll onClick={handleRoll} />}
       </div>
       {showWinEffect && <div className="win-effect"></div>}
       {showWinEffect && <Achievement name={handRank} />}
-      
     </div>
   );
 };

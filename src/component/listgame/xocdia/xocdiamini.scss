@@ -105,25 +105,25 @@
 }
 
 .aura-blink {
-    animation: aura-blink-effect .5s infinite;
+  animation: aura-blink-effect 0.5s infinite;
 }
 
 @keyframes aura-blink-effect {
-    0% {
-        opacity: 0.1;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.1;
-    }
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
 }
 
 .sound-icon-xd {
   position: absolute;
-  top:100px;
-  right:280px;
+  top: 100px;
+  right: 280px;
   font-size: 30px;
   color: white;
 }
@@ -133,39 +133,147 @@
     position: absolute;
     bottom: 330px;
     left: 250px;
-    transform: rotateY(180deg)!important;
+    transform: rotateY(180deg) !important;
   }
-  
 }
 
 .xd-text {
-    width: 470px;
-    height: 90px;
-    position: absolute;
-    bottom: 585px;
-    left: 320px;
-    font-size: 30px;
-    font-weight: normal;
-    color: white;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: blink 1s infinite;
-    // border:1px solid red;
-  }
+  width: 470px;
+  height: 90px;
+  position: absolute;
+  bottom: 585px;
+  left: 320px;
+  font-size: 30px;
+  font-weight: normal;
+  color: white;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: blink 1s infinite;
+  // border:1px solid red;
+}
 
-  .group-data {
+.group-data {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: white;
+  font-size: 28px;
+  .player-chan {
     position: absolute;
-    top: 130px;
-    left: 100px;
-    color: white;
-    font-size: 30px;
-    .icon-item2 {
-      position: absolute;
-      top: 140px;
-      left: 150px;
-      display: flex;
-      gap: 10px;
-    }
+    top: 120px;
+    left: 90px;
+    display: flex;
+    gap: 10px;
   }
+  .money-chan {
+    position: absolute;
+    top: 285px;
+    left: 140px;
+    display: flex;
+    gap: 10px;
+  }
+  .player-le {
+    position: absolute;
+    top: 120px;
+    left: 830px;
+    display: flex;
+    gap: 10px;
+  }
+  .money-le {
+    position: absolute;
+    top: 285px;
+    left: 700px;
+    display: flex;
+    gap: 10px;
+  }
+  .player-4d {
+    position: absolute;
+    top: 350px;
+    left: 70px;
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+  }
+  .money-4d {
+    position: absolute;
+    top: 475px;
+    left: 110px;
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+  }
+  .player-3d1t {
+    position: absolute;
+    top: 350px;
+    left: 260px;
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+  }
+  .money-3d1t {
+    position: absolute;
+    top: 475px;
+    left: 290px;
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+  }
+  .player-1d3t {
+    position: absolute;
+    top: 350px;
+    left: 435px;
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+  }
+  .money-1d3t {
+    position: absolute;
+    top: 475px;
+    left: 465px;
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+  }
+  .player-4t {
+    position: absolute;
+    top: 350px;
+    left: 620px;
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+  }
+  .money-4t {
+    position: absolute;
+    top: 475px;
+    left: 650px;
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+  }
+  .player-2d2t {
+    position: absolute;
+    top: 350px;
+    left: 800px;
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+  }
+  .money-2d2t {
+    position: absolute;
+    top: 475px;
+    left: 830px;
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+  }
+  .xd-round {
+    position: absolute;
+    top: 115px;
+    left: 530px;
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+  }
+}

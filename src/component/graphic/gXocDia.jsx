@@ -1,4 +1,4 @@
-import xocdiaImg from "../assets/images/Xocdia-Main.webp";
+import xocdiaImg from "../assets/images/xocdia.webp";
 import "./gXocDia.scss";
 
 ////main xóc dĩa
@@ -60,7 +60,7 @@ const XdBowl = (props) => {
   );
 };
 // logo chẵn
-const XdChan = (props) => {
+const EVEN = (props) => {
   const xdChan = { x: 820, y: 615, width: 190, height: 110 };
 
   return (
@@ -68,7 +68,7 @@ const XdChan = (props) => {
       className={props.className}
       style={{
         position: "absolute",
-        top: "150px",
+        top: "130px",
         left: "115px",
         backgroundImage: `url(${xocdiaImg})`,
         backgroundPosition: `-${xdChan.x}px -${xdChan.y}px`,
@@ -91,7 +91,7 @@ const Xd12 = (props) => {
     <div
       style={{
         position: "absolute",
-        top: "260px",
+        top: "240px",
         ...positionStyle,
         backgroundImage: `url(${xocdiaImg})`,
         backgroundPosition: `-${xd12.x}px -${xd12.y}px`,
@@ -103,7 +103,7 @@ const Xd12 = (props) => {
   );
 };
 // logo lẻ
-const XdLe = (props) => {
+const ODD = (props) => {
   const xdLe = { x: 1020, y: 615, width: 100, height: 110 };
 
   return (
@@ -111,7 +111,7 @@ const XdLe = (props) => {
       className={props.className}
       style={{
         position: "absolute",
-        top: "150px",
+        top: "130px",
         right: "160px",
         backgroundImage: `url(${xocdiaImg})`,
         backgroundPosition: `-${xdLe.x}px -${xdLe.y}px`,
@@ -416,12 +416,12 @@ export {
   Xdbanhchung,
   XdBowl,
   XdCanhdao,
-  XdChan,
+  ODD,
   XdChanAura,
   XdDisc,
   XdI,
   XdLantern,
-  XdLe,
+  EVEN,
   XdLeAura,
   XdMai,
   XdTable,

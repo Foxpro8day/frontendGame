@@ -10,10 +10,12 @@ import xdRoll from "../../assets/audio/RollingXD.m4a";
 import selectedSound from "../../assets/audio/select4.m4a";
 import winSound from "../../assets/audio/win.m4a";
 import {
+  BeginImg,
   BgInsImg,
   ChatInfoImg,
   ChibiImg,
   LoseImg,
+  ReplayImg,
   TimerImg,
   WinImg,
 } from "../../graphic/gOther";
@@ -26,11 +28,12 @@ import {
   Xdbanhchung,
   XdBowl,
   XdCanhdao,
-  EVEN,
+  XdChan,
   XdChanAura,
   XdDisc,
   XdI,
-  ODD,
+  XdLantern,
+  XdLe,
   XdLeAura,
   XdMai,
   XdTable,
@@ -43,19 +46,20 @@ import CoinLogic from "./coinLogic";
 import "./xocdiamini.scss";
 
 const XocdiaMini = ({ title, onClose }) => {
+  const socket = io(process.env.REACT_APP_URL_SITE);
   const [gameState, setGameState] = useState({});
   const [countdown, setCountdown] = useState(0);
   const [selectedBet, setSelectedBet] = useState(null);
   const [isShowInstructor, setIsShowInstructor] = useState(false);
-  const [gameInfo, setGameInfo] = useState({});
+  const [bets, setBets] = useState({});
   const [result, setResult] = useState("");
   const [dices, setDices] = useState([]);
-  const [round, setRound] = useState("");
+  const [round, setRound] = useState(1);
 
-  const [gameStage, setGameStage] = useState(""); // Trạng thái game: 'waiting', 'betting', 'rolling', 'finish'
+  const [gameStage, setGameStage] = useState("firstTime"); // Trạng thái game: 'waiting', 'betting', 'rolling', 'finish'
   const [chip, setChip] = useState([0, 1, 0, 1]);
-  const [result1, setResult1] = useState(""); // Kết quả game 1
-  const [result2, setResult2] = useState(""); // Kết quả game 2
+  const [result1, setResult1] = useState(null); // Kết quả game 1
+  const [result2, setResult2] = useState(null); // Kết quả game 2
   const [history, setHistory] = useState([
     XdXudo,
     XdXutrang,
@@ -217,7 +221,61 @@ const XocdiaMini = ({ title, onClose }) => {
   // Hàm tính kết quả
   const getResult = (coins) => {
     const totalPoints = coins.reduce((acc, value) => acc + value, 0);
-    return totalPoints % 2 === 0 ? "EVEN" : "ODD";
+    return totalPoints % 2 === 0 ? "XdChan" : "XdLe";
+  };
+
+  // Xử lý khi bấm nút bắt đầu
+  const startGame = () => {
+    playSound(selectRef);
+    setGameStage("betting");
+    setCountdown(5); // Thời gian cho phép chọn "Chẵn" hoặc "lẻ"
+  };
+
+  // Cập nhật countdown và trạng thái game
+  useEffect(() => {
+    let timer;
+    if (gameStage === "betting" || gameStage === "rolling") {
+      timer = setInterval(() => {
+        setCountdown((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [gameStage]);
+
+  // Quản lý các giai đoạn game
+  useEffect(() => {
+    if (countdown === 0) {
+      if (gameStage === "betting") {
+        setGameStage("rolling");
+        setCountdown(5); // Thời gian chờ để roll xúc xắc
+      } else if (gameStage === "rolling") {
+        const flippedCoins = flipCoins();
+        const mappedHistory = flippedCoins.map((value) => diceMap[value]);
+        const finalResult = getResult(flippedCoins);
+        setChip(flippedCoins);
+        setHistory(mappedHistory);
+        setResult1(finalResult);
+        setResult2(
+          calcResult2(
+            flippedCoins[0],
+            flippedCoins[1],
+            flippedCoins[2],
+            flippedCoins[3]
+          )
+        );
+        setGameStage("finish");
+        setCountdown(0); // Thời gian chờ để hiển thị kết quả
+      }
+    }
+  }, [countdown, gameStage]);
+
+  const handlePlayAgain = () => {
+    playSound(selectRef);
+    setSelectedBet1(null);
+    setSelectedBet2(null);
+    setResult1(null); // Đặt lại kết quả
+    setGameStage("waiting"); // Quay lại trạng thái waiting
+    setCountdown(0); // Bắt đầu đếm ngược lại
   };
 
   useEffect(() => {
@@ -267,9 +325,9 @@ const XocdiaMini = ({ title, onClose }) => {
 
   const renderResultComponent1 = (result1) => {
     switch (result1) {
-      case "EVEN":
+      case "XdChan":
         return <XdChanAura className="aura-blink" />;
-      case "ODD":
+      case "XdLe":
         return <XdLeAura className="aura-blink" />;
       default:
         return <></>;
@@ -353,49 +411,46 @@ const XocdiaMini = ({ title, onClose }) => {
     setIsShowIntructor(false);
   };
 
-  // Tạo kết nối socket một lần khi component mount
-  useEffect(() => {
-    const socket = io(process.env.REACT_APP_URL_SITE, {
-      withCredentials: true,
-    });
+  // ✅ Nhận dữ liệu từ backend thông qua Socket.IO
+  // useEffect(() => {
+  //   socket.on("round_update_xocdia", (data) => {
+  //     console.log(data);
+  //     setBets(data.bets);
+  //     setResult(data.result);
+  //     setRound(data.round);
+  //     setDices(data.coinFaces);
+  //     setGameState(data);
+  //     setCountdown(data.countdown);
+  //   });
 
-    // Lắng nghe sự kiện kết quả xóc đĩa và cập nhật state
-    socket.on("round_update_xocdia", (data) => {
-      console.log("Kết quả xóc đĩa nhận được:", data);
-      setGameState((prev) => ({
-        ...prev,
-        ...data,
-      }));
-      setGameInfo(data.bets);
-      setCountdown(data.countdown);
-      setRound(data.round);
-      setGameStage(data.gameStage);
-      setResult1(data.oddEvenResult);
-      setResult2(data.result);
-    });
+  //   return () => {
+  //     socket.off("round_update_xocdia");
+  //   };
+  // }, []);
 
-    // Cleanup khi component unmount
-    return () => {
-      socket.off("round_update_xocdia");
-      socket.disconnect();
-    };
-  }, []);
+  // useEffect(() => {
+  //   if (gameState.gameStage === "betting" && countdown <= 5) {
+  //     playSound(clockRef);
+  //   }
+
+  //   if (gameState.gameStage === "rolling" && countdown <= 3) {
+  //     playSound(plateRef);
+  //   }
+
+  //   if (gameState.gameStage === "finish") {
+  //     if (selectedBet === gameState.result) {
+  //       playSound(winRef);
+  //     } else {
+  //       playSound(loseRef);
+  //     }
+  //   }
+  // }, [gameState, countdown]);
 
   const handleBet = (bet) => {
     if (gameState.gameStage === "betting") {
       setSelectedBet(bet);
     }
   };
-
-  const betTypes = [
-    { key: "ODD", userClass: "player-chan", moneyClass: "money-chan" },
-    { key: "EVEN", userClass: "player-le", moneyClass: "money-le" },
-    { key: "RED4", userClass: "player-4d", moneyClass: "money-4d" },
-    { key: "RED3_WHITE1", userClass: "player-3d1t", moneyClass: "money-3d1t" },
-    { key: "RED1_WHITE3", userClass: "player-1d3t", moneyClass: "money-1d3t" },
-    { key: "WHITE4", userClass: "player-4t", moneyClass: "money-4t" },
-    { key: "RED2_WHITE2", userClass: "player-2d2t", moneyClass: "money-2d2t" },
-  ];
 
   return (
     <>
@@ -411,39 +466,29 @@ const XocdiaMini = ({ title, onClose }) => {
         <Xd12 left />
         <Xd12 right />
         <div className="bet-section1">
-          <div className="group-data">
-            {betTypes.map(({ key, userClass, moneyClass }) => (
-              <div key={key}>
-                <i className={`fa-solid fa-users ${userClass}`}>
-                  {" " + (gameInfo?.[key]?.players || 0)}
-                </i>
-                <i
-                  className={`icon-item2 fa-solid fa-dollar-sign ${moneyClass}`}
-                >
-                  {" " + (gameInfo?.[key]?.money || 0)}
-                </i>
-              </div>
-            ))}
-            <i className="fa-solid fa-hashtag xd-round"> {round || 0}</i>
-          </div>
-
-          <div onClick={() => handleBet1("EVEN")}>
-            <EVEN
+          {/* <div className="group-data">
+            <i className="fa-solid fa-users">{" " + bets?.ODD?.players || 0}</i>
+            <i className="icon-item2 fa-solid fa-dollar-sign">
+              {" " + bets?.ODD?.money || 0}
+            </i>
+          </div> */}
+          <div onClick={() => handleBet1("XdChan")}>
+            <XdChan
               className={`chanIcon ${
-                gameStage === "finish" && result1 === "EVEN" && "aura"
+                gameStage === "finish" && result1 === "XdChan" && "aura"
               }`}
             />
             {(gameStage === "betting" ||
               gameStage === "rolling" ||
               gameStage === "finish") &&
-            selectedBet1 === "EVEN" ? (
+            selectedBet1 === "XdChan" ? (
               <XdChanAura />
             ) : (
               <></>
             )}
           </div>
-          <div onClick={() => handleBet1("ODD")}>
-            <ODD
+          <div onClick={() => handleBet1("XdLe")}>
+            <XdLe
               className={`leIcon ${
                 gameStage === "finish" && result1 === "Xdle" && "aura"
               }`}
@@ -451,7 +496,7 @@ const XocdiaMini = ({ title, onClose }) => {
             {(gameStage === "betting" ||
               gameStage === "rolling" ||
               gameStage === "finish") &&
-            selectedBet1 === "ODD" ? (
+            selectedBet1 === "XdLe" ? (
               <XdLeAura />
             ) : (
               <></>
@@ -508,7 +553,7 @@ const XocdiaMini = ({ title, onClose }) => {
         {gameStage === "betting" &&
           countdown <= 4 &&
           countdown >= 0 &&
-          (selectedBet1 === "EVEN" ? (
+          (selectedBet1 === "XdChan" ? (
             <ChatInfoImg
               className="xd-text"
               top="-80px"
@@ -516,7 +561,7 @@ const XocdiaMini = ({ title, onClose }) => {
               transform="scale(2)"
               text={conversation(3)}
             />
-          ) : selectedBet1 === "ODD" ? (
+          ) : selectedBet1 === "XdLe" ? (
             <ChatInfoImg
               className="xd-text"
               top="-80px"
@@ -533,7 +578,6 @@ const XocdiaMini = ({ title, onClose }) => {
               text={conversation(1)}
             />
           ))}
-
         <div className={gameStage === "rolling" ? "bowl-disc" : ""}>
           <XdDisc className="xd-disc" />
           {(gameStage === "firstTime" ||
@@ -576,7 +620,24 @@ const XocdiaMini = ({ title, onClose }) => {
               <WinImg bottom={0} left={230} />
             </>
           ))}
-
+        {gameStage === "firstTime" && (
+          <div className="game-stage" onClick={startGame}>
+            <BeginImg top="500px" left="320px" transform="scale(.7)" />
+          </div>
+        )}
+        {gameStage === "waiting" && (
+          <div
+            className={`game-stage ${isHidden ? "hidden" : ""}`}
+            onClick={startGame}
+          >
+            <BeginImg top="500px" left="320px" transform="scale(.7)" />
+          </div>
+        )}
+        {gameStage === "finish" && (
+          <div className="game-stage" onClick={handlePlayAgain}>
+            <ReplayImg top="500px" left="320px" transform="scale(.7)" />
+          </div>
+        )}
         <div className="sound-icon-xd" onClick={() => handleSound()}>
           {isSoundOn ? (
             <i className="fa-solid fa-volume-high"></i>
@@ -603,7 +664,7 @@ const XocdiaMini = ({ title, onClose }) => {
             text={conversation(7)}
           />
         )}
-        {console.log(selectedBet1, selectedBet2)}
+        <XdLantern />
         <XdX onClick={onClose} top="50px" right="0px" />
         <XdI onClick={handleIicon} top="50px" left="0px" />
         {isShowIntructor ? (
