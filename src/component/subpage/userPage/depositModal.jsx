@@ -106,7 +106,7 @@ const DepositForm = ({ onClose }) => {
           name="accountNumber"
           value={formData.accountNumber}
           readOnly
-          className="p-2  mt-2 "
+          className="p-2 mt-2 "
         />
 
         {/* Tên tài khoản */}
@@ -116,7 +116,7 @@ const DepositForm = ({ onClose }) => {
           name="accountName"
           value={formData.accountName}
           readOnly
-          className=" p-2   "
+          className="p-2"
         />
 
         {/* Chi nhánh */}
@@ -126,7 +126,7 @@ const DepositForm = ({ onClose }) => {
           name="branch"
           value={formData.branch}
           readOnly
-          className=" p-2   "
+          className="p-2"
         />
 
         {/* Số tiền */}

@@ -3,9 +3,10 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import React from "react";
 import "./carousel.scss";
 
-import banner1 from "../assets/images/baner-8day-pc-1.webp";
-import banner2 from "../assets/images/baner-8day-pc-2.webp";
-import banner from "../assets/images/baner-8day-pc.webp";
+import banner1 from "../assets/images/banner3.webp";
+import banner2 from "../assets/images/banner4.webp";
+import banner3 from "../assets/images/banner5.webp";
+import banner4 from "../assets/images/banner6.webp";
 
 const Carousel = () => {
   return (
@@ -29,16 +30,23 @@ const Carousel = () => {
             data-bs-target="#carouselExampleIndicators"
             data-bs-slide-to="2"
           ></li>
+          <li
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="3"
+          ></li>
         </ol>
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img className="d-block w-100" src={banner} alt="First slide" />
+            <img className="d-block w-100" src={banner1} alt="First slide" />
           </div>
           <div className="carousel-item">
-            <img className="d-block w-100" src={banner1} alt="Second slide" />
+            <img className="d-block w-100" src={banner2} alt="Second slide" />
           </div>
           <div className="carousel-item">
-            <img className="d-block w-100" src={banner2} alt="Third slide" />
+            <img className="d-block w-100" src={banner3} alt="Third slide" />
+          </div>
+          <div className="carousel-item">
+            <img className="d-block w-100" src={banner4} alt="Third slide" />
           </div>
         </div>
         <a

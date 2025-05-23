@@ -3,7 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.scss";
 import AuthProvider, { AuthContext } from "./component/Context/AuthContext.js";
 import MainPage from "./component/mainpage/mainpage.jsx";
-import FooterMenu from "./component/subpage/afterLogin/FooterMenu.jsx";
+import Dashboard from "./component/subpage/afterLogin/Dashboard.jsx";
 import LuckyWheelMembers from "./component/subpage/afterLogin/LuckyWheelMembers.jsx";
 import Luckywheel from "./component/subpage/luckywheel/Luckywheel.jsx";
 import Page404 from "./component/subpage/page404/Page404.jsx";
@@ -31,7 +31,7 @@ function App() {
             />
             <Route
               path="/dashboard"
-              element={<ProtectedRoute component={<FooterMenu />} />}
+              element={<ProtectedRoute component={<Dashboard />} />}
             />
             <Route
               path="/luckywheelmember"
@@ -54,13 +54,7 @@ function App() {
 const ProtectedRoute = ({ component }) => {
   const { isLoggedIn } = useContext(AuthContext);
 
-  return (
-    <>
-      {component}
-      {isLoggedIn && <FooterMenu />}{" "}
-      {/* ✅ Hiển thị FooterMenu nếu đã đăng nhập */}
-    </>
-  );
+  return <>{component}</>;
 };
 
 export default App;

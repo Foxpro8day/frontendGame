@@ -32,7 +32,7 @@ form {
   width: 400px;
   border-radius: 15px;
   border: 1px solid rgb(182, 187, 189);
-  z-index: 1000;
+  z-index: 100;
   h2 {
     font-weight: 700;
     color: rgba(0, 34, 184, 0.8);
@@ -74,8 +74,9 @@ button {
 }
 
 @media (max-width: 768px) {
-  .modal-content{form {
-    width: 80vw;
-  }}
-  
+  .modal-content {
+    form {
+      width: 80vw;
+    }
+  }
 }

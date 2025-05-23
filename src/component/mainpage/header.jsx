@@ -2,17 +2,22 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useContext, useState, useRef, useEffect } from "react";
 import { AuthContext } from "../Context/AuthContext"; // ✅ Import context
 import logoImg from "../assets/images/logo126x60.png";
-import headerVidMb from "../assets/videos/headermb.mp4";
-import headerVidPc from "../assets/videos/headerpc.mp4";
 import LoginRegister from "../subpage/loginRegister/LoginRegister";
 import useIsMobile from "../utils/useIsMobile";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import avatar from "../assets/images/fox.jpg";
 import "./header.scss";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [select, setSelect] = useState("");
+  const [loading, setLoading] = useState(true);
   const isMobile = useIsMobile();
-  const { isLoggedIn, logout } = useContext(AuthContext); // ✅ Dùng context
+  const { user, isLoggedIn, logout } = useContext(AuthContext); // ✅ Dùng context
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
   const modalRef = useRef(null); // ✅ Tạo ref để theo dõi modal
 
   // ✅ Xử lý sự kiện click ra ngoài modal
@@ -48,27 +53,32 @@ const Header = () => {
     setIsModalOpen(false);
   };
 
-  const videoSrc = isMobile ? headerVidMb : headerVidPc;
+  // ✅ Xử lý đăng xuất
+  const handleLogout = async () => {
+    try {
+      await logout(); // 🚀 Gọi hàm logout từ context (xóa cookie trên server)
+
+      // ✅ Xóa tất cả dữ liệu client-side
+      localStorage.clear();
+      sessionStorage.clear();
+
+      // ✅ Reload lại trang để đảm bảo mọi state được reset
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Lỗi đăng xuất:", error);
+    }
+  };
   const headerClass = isMobile ? "header-top-mb" : "header-top-pc";
 
   return (
     <div className="header-container">
-      {/* Video Background */}
-      <div className="header-video">
-        <video
-          src={videoSrc}
-          autoPlay
-          loop
-          playsInline
-          muted
-          aria-hidden="true"
-        ></video>
-      </div>
-
       {/* Header Content */}
       <div className={headerClass}>
         <div className={isMobile ? "logo-mobile" : "logo"}>
           <img src={logoImg} alt="logo" className="logo-img" />
+        </div>
+        <div className={isMobile || isLoggedIn ? "logo-mobile" : "slogan"}>
+          <h2>MAKE YOUR DAY</h2>
         </div>
         {!isLoggedIn ? (
           <ButtonGroup
@@ -78,7 +88,46 @@ const Header = () => {
             onRegister={() => handleOpenModal("register")}
           />
         ) : (
-          <div className="welcome-text">Chào mừng đến với trang chủ 8Day</div>
+          <>
+            <div className="header-menu">
+              <div className="aHeader-wrapper">
+                <div className="aHeader-left" onClick={() => navigate("/user")}>
+                  <div className="user-group">
+                    <img src={avatar} alt="" />
+                  </div>
+                </div>
+                <div className="aHeader-right">
+                  {/* Danh sách icon */}
+                  {[
+                    {
+                      icon: "fa-tachograph-digital",
+                      text: "Dashboard",
+                      link: "/dashboard",
+                    },
+                    { icon: "fa-house", text: "Trang chủ", link: "/" },
+                    { icon: "fa-dice", text: "Games", link: "/" },
+                  ].map((item, index) => (
+                    <div
+                      key={index}
+                      className="background-icon"
+                      onClick={() => navigate(item.link)}
+                    >
+                      <i className={`fa-solid ${item.icon}`}></i>
+                      <div className="menu-title">{item.text}</div>
+                    </div>
+                  ))}
+                  <div
+                    className="background-icon"
+                    onClick={handleLogout} // 🚀 Gọi hàm đăng xuất
+                  >
+                    <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                    <div className="menu-title">Đăng xuất</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="welcome-text">Chào mừng đến với trang chủ 8Day</div>
+          </>
         )}
       </div>
       {/* Modal */}

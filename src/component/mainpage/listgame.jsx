@@ -1,12 +1,13 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import selectIn from "../assets/audio/select3.m4a";
-import baucuaImg from "../assets/images/logobaucua.webp";
-import lodesieutocImg from "../assets/images/logolode.webp";
-import pokerImg from "../assets/images/logopoker.webp";
-import taixiuImg from "../assets/images/logotaixiu.webp";
-import vongquayImg from "../assets/images/logovongquay.webp";
-import xocdiaImg from "../assets/images/logoxocdia.webp";
+import choilathang from "../assets/images/choilathang.png";
+import baucuaImg from "../assets/images/logobc.png";
+import lodesieutocImg from "../assets/images/logold.png";
+import pokerImg from "../assets/images/logopk.png";
+import taixiuImg from "../assets/images/logotx.png";
+import vongquayImg from "../assets/images/logovq.png";
+import xocdiaImg from "../assets/images/logoxd.png";
 import BaucuaMini from "../listgame/baucua/baucua";
 import LodeSieutoc from "../listgame/lodesieutoc/lodesieutoc";
 import Poker from "../listgame/poker/poker";
@@ -14,7 +15,9 @@ import TaixiuMini from "../listgame/taixiu/taixiumini";
 import XocdiaMini from "../listgame/xocdia/xocdiamini";
 import GameLoader from "../subpage/loadingpage/GameLoader";
 import useIsMobile from "../utils/useIsMobile";
-
+import { AuthContext } from "../Context/AuthContext";
+import { toast } from "react-toastify";
+import axios from "axios";
 import "./listgame.scss";
 
 const Listgame = () => {
@@ -25,6 +28,10 @@ const Listgame = () => {
   const select1Ref = useRef(null);
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoginGateOpen, setIsLoginGateOpen] = useState(false);
+  const [emailInput, setEmailInput] = useState("");
+  const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
+  const desUrl = process.env.REACT_APP_URL_SITE;
 
   const navigate = useNavigate();
   const isMobile = useIsMobile();
@@ -61,9 +68,15 @@ const Listgame = () => {
     setModalType("");
   };
 
+  const { isLoggedIn, setUser, setIsLoggedIn } = useContext(AuthContext);
+
   const openModalGame = (type) => {
     setModalType(type);
     setIsModalOpen(true);
+
+    if (!isLoggedIn) {
+      setIsLoginGateOpen(true); // Mở modal nhập email
+    }
   };
 
   const handleMouseDown = (e, setPosition, currentPosition) => {
@@ -166,6 +179,26 @@ const Listgame = () => {
     setActiveSource("popup");
   };
 
+  const handleSubmitEmail = async () => {
+    if (!emailInput) return;
+
+    try {
+      setIsSubmittingEmail(true);
+      await axios.post(`${desUrl}/user/email-login`, { email: emailInput });
+
+      // Đợi cookie từ server (must be same-origin or withCredentials)
+      const response = await axios.get("/user/me", { withCredentials: true });
+      setUser(response.data);
+      setIsLoggedIn(true);
+      setIsLoginGateOpen(false); // ✅ Cho phép chơi game
+      toast.success("Đăng nhập thành công!");
+    } catch (error) {
+      toast.error("Email không hợp lệ hoặc lỗi server.");
+    } finally {
+      setIsSubmittingEmail(false);
+    }
+  };
+  
   return (
     <div className="listgame-container d-flex justify-content-center">
       <div className="listgame-wrapper mt-3">
@@ -179,7 +212,7 @@ const Listgame = () => {
           </marquee>
         </div>
         <div className="listgame-title">
-          <h1 className="style-title">CHƠI LÀ THẮNG</h1>
+          <img src={choilathang} alt="" className="style-img" />
         </div>
         <div className="listgame-items">
           <div className="game-item-wraper">
@@ -240,6 +273,56 @@ const Listgame = () => {
                 ) : modalType === "pr" ? (
                   <Poker title="" onClose={closeModal} />
                 ) : null}
+              </div>
+            </div>
+          )}
+        </>
+      )}
+      {isModalOpen && (
+        <>
+          {!isLoaded ? (
+            <GameLoader onReady={() => setIsLoaded(true)} />
+          ) : (
+            <div
+              className="game-container"
+              style={{
+                pointerEvents: isLoginGateOpen ? "none" : "auto",
+                filter: isLoginGateOpen ? "blur(4px)" : "none",
+              }}
+            >
+              {/* ...game modal as before... */}
+            </div>
+          )}
+
+          {isLoginGateOpen && (
+            <div className="email-overlay">
+              <div className="email-modal">
+                <h4>Nhập email của bạn để tiếp tục</h4>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
+                />
+                <div className="email-modal-buttons">
+                  <button
+                    onClick={handleSubmitEmail}
+                    disabled={isSubmittingEmail}
+                  >
+                    {isSubmittingEmail ? "Đang gửi..." : "Tiếp tục"}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setIsModalOpen(false); // đóng game modal
+                      setIsLoginGateOpen(false); // đóng email modal
+                      setModalType(""); // reset game
+                      navigate("/"); // quay về trang chủ
+                    }}
+                    className="close-btn"
+                  >
+                    Đóng
+                  </button>
+                </div>
               </div>
             </div>
           )}

@@ -120,6 +120,7 @@ const UserPage = () => {
         </div>
         <div className="basic-info">
           <div className="info">
+            <div>Thành viên: {user.role}</div>
             <div>Level: 1</div>
             <div>{user.username}</div>
           </div>
@@ -139,6 +140,11 @@ const UserPage = () => {
           {isShowModal === "info" ? (
             <div className="info-field">
               <div className="info-field-modal">
+                <span onClick={backToMainMenu} className="back">
+                  <i className="fa-solid fa-arrow-left me-2"></i>Back
+                </span>
+                <h4 className="user-title">Thông tin cá nhân</h4>
+
                 <div className="">ID: {userData.id}</div>
                 <div className="">Tên: {userData.username}</div>
                 <div className="">SĐT: {userData.phone}</div>
@@ -148,27 +154,24 @@ const UserPage = () => {
                   Ngày tạo: {new Date(userData.createdAt).toLocaleDateString()}
                 </div>
               </div>
-              <i
-                className="fa-solid fa-arrow-left"
-                onClick={backToMainMenu}
-              ></i>
             </div>
           ) : isShowModal === "history" ? (
             <div className="info-field">
               <div className="info-field-modal">
-                <div className="">Lịch sử cược</div>
+                <span onClick={backToMainMenu} className="back">
+                  <i className="fa-solid fa-arrow-left me-2"></i>Back
+                </span>
+                <h4 className="user-title">Lịch sử cược</h4>
+
+                <div className="">Đang xây dựng</div>
               </div>
-              <i
-                className="fa-solid fa-arrow-left"
-                onClick={backToMainMenu}
-              ></i>
             </div>
           ) : isShowModal === "trans" ? (
             <div className="info-field2">
-              <i
-                className="fa-solid fa-arrow-left iconmodal"
-                onClick={backToMainMenu}
-              ></i>
+              <span onClick={backToMainMenu} className="back">
+                <i className="fa-solid fa-arrow-left iconmodal"></i> Back
+              </span>
+
               <div className="info-field-modal">
                 <div className="conect8d-title">Đổi tiền game</div>
                 <div className="conect8d-body">

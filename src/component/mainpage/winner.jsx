@@ -1,6 +1,25 @@
 import "./winner.scss";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Winner = () => {
+  const [winners, setWinners] = useState([]);
+  const API_URL = process.env.REACT_APP_URL_SITE;
+  useEffect(() => {
+    console.log("API URL:", process.env.REACT_APP_URL_SITE);
+    const fetchWinners = async () => {
+      try {
+      const response = await axios.get(`${API_URL}/user/vinh-danh`);
+        setWinners(response.data);
+      } catch (error) {
+        console.error("Error fetching winners:", error);
+      }
+    };
+
+    fetchWinners();
+  }, []);
+  
+
   return (
     <div className="winner-container">
       <div className="winner-wrapper">
@@ -14,66 +33,14 @@ const Winner = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>79b80f6543db</td>
-              <td>Tài Xỉu</td>
-              <td>45,634,000</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>df1da0a68b1b</td>
-              <td>Lô Đề</td>
-              <td>70,161,000</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>9fd571b86806</td>
-              <td>Xóc Đĩa</td>
-              <td>92,945,000</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>952064389928</td>
-              <td>Bầu Cua</td>
-              <td>40,153,000</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>31e9a185e0cf</td>
-              <td>Tài Xỉu</td>
-              <td>55,375,000</td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td>7807ebdfe0ab</td>
-              <td>Lô Đề</td>
-              <td>60,056,000</td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td>05aa4c526f47</td>
-              <td>Bầu Cua</td>
-              <td>72,123,000</td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td>b9599c5d4185</td>
-              <td>Xóc Đĩa</td>
-              <td>67,475,000</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>fad72efdd4e6</td>
-              <td>Lô Đề</td>
-              <td>88,252,000</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>68c483034a39</td>
-              <td>Tài Xỉu</td>
-              <td>95,590,000</td>
-            </tr>
+            {winners.map((winner, index) => (
+              <tr key={index}>
+                <td>{winner.stt}</td>
+                <td>{winner.name}</td>
+                <td>{winner.game}</td>
+                <td>{winner.reward}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

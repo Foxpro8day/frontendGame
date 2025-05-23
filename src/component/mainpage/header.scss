@@ -1,8 +1,7 @@
 .header-container {
   width: 100vw;
-  
   height: 80px;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,6 +52,15 @@
     }
   }
 
+  .slogan {
+    color: rgb(255, 255, 255);
+    justify-self: flex-start;
+    width: 100%;
+    padding-left: 20px;
+    h2 {
+      font-weight: bold;
+    }
+  }
   .group-button {
     display: flex;
     align-items: center;
@@ -71,7 +79,7 @@
   width: 150px;
   height: 50px;
   margin-left: 10px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   // background-image: url(../assets/images/buttons.webp); /* Giữ hình nền */
   // background-position: -10px -147px;
   // width: 243px;
@@ -93,7 +101,7 @@
 .register-button:hover {
   color: rgb(6, 74, 201);
   background-color: white;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 /* Tạo lớp phủ chữ để hiệu ứng RGB */
@@ -141,8 +149,66 @@
   filter: brightness(120%);
 }
 
+.aHeader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 50px 50px 0px 0px;
+}
+
+.aHeader-left {
+  display: flex;
+  align-items: center;
+}
+
+.aHeader-left img {
+  border-radius: 50%;
+  width: 45px;
+  border: 3px solid rgb(4, 147, 241);
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+}
+
+.aHeader-right {
+  display: flex;
+  gap: 15px;
+}
+
+.background-icon {
+  position: relative;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(172, 238, 255);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+}
+
+.user-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-right: 20px;
+}
+
+.menu-title {
+  white-space: nowrap;
+  font-size: 10px;
+}
+
 @media (max-width: 768px) {
- .header-container {
-  height: 110px
- } 
+  .user-group {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    height: 110px;
+  }
 }

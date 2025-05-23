@@ -66,26 +66,23 @@
 }
 
 .info-field {
-  background: rgb(139, 209, 255);
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
   display: flex;
   align-items: flex-start;
   position: relative;
-  i {
-    color: rgb(4, 147, 241);
-  }
-  .iconmodal {
-    position: absolute;
-  }
   color: rgb(3, 64, 105);
-  cursor: pointer;
+  .title:hover {
+    color: rgb(4, 147, 241);
+    cursor: pointer;
+  }
 }
 
 .info-field-modal {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .conect8d-title {
@@ -160,4 +157,22 @@
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
         cursor: pointer;
   }
+}
+
+.back {
+  background: rgb(4, 147, 241);
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 20px;
+  color: white;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  width: 100px;
+  cursor: pointer;
+  i {
+    color: white;
+  }
+}
+
+.user-title {
+  align-self: center;
 }

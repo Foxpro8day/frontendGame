@@ -58,17 +58,17 @@ const LoginRegister = ({ select, onClick }) => {
       !formRegisterData.password ||
       !formRegisterData.confirmPassword
     ) {
-      showToast("⚠️ Vui lòng điền đầy đủ thông tin!", "error");
+      showToast("Vui lòng điền đầy đủ thông tin!", "error");
       return;
     }
 
     if (formRegisterData.phone.length !== 10) {
-      showToast("⚠️ Số điện thoại phải đúng 10 số.", "error");
+      showToast("Số điện thoại phải đúng 10 số.", "error");
       return;
     }
 
     if (formRegisterData.password !== formRegisterData.confirmPassword) {
-      showToast("❌ Mật khẩu xác nhận không khớp!", "error");
+      showToast("Mật khẩu xác nhận không khớp!", "error");
       return;
     }
 
@@ -80,11 +80,11 @@ const LoginRegister = ({ select, onClick }) => {
         { withCredentials: true }
       );
 
-      showToast("✅ Đăng ký thành công! Hãy đăng nhập.");
+      showToast("Đăng ký thành công! Hãy đăng nhập.");
       setSelectInform("login"); // Chuyển về form đăng nhập sau khi đăng ký thành công
     } catch (error) {
       showToast(
-        error.response?.data?.message || "❌ Thất bại! Kiểm tra lại thông tin.",
+        error.response?.data?.message || "Thất bại! Kiểm tra lại thông tin.",
         "error"
       );
     } finally {
@@ -97,7 +97,7 @@ const LoginRegister = ({ select, onClick }) => {
     e.preventDefault();
 
     if (!formLoginData.username || !formLoginData.password) {
-      showToast("⚠️ Vui lòng nhập tài khoản và mật khẩu!", "error");
+      showToast("Vui lòng nhập tài khoản và mật khẩu!", "error");
       return;
     }
 
@@ -107,13 +107,13 @@ const LoginRegister = ({ select, onClick }) => {
         withCredentials: true,
       });
 
-      showToast("✅ Đăng nhập thành công!");
+      showToast("Đăng nhập thành công!");
       setTimeout(() => {
         window.location.reload(); // Reload trang sau khi đăng nhập thành công
       }, 2000);
     } catch (error) {
       showToast(
-        error.response?.data?.message || "❌ Thất bại! Kiểm tra lại thông tin.",
+        error.response?.data?.message || "Thất bại! Kiểm tra lại thông tin.",
         "error"
       );
     } finally {

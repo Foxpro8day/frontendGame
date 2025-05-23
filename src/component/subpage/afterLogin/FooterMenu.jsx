@@ -67,7 +67,8 @@ const FooterMenu = () => {
   if (!userData) return <p>Không tìm thấy người dùng.</p>;
 
   return (
-    <>
+    <div className="afoot-container">
+
       <div className="afoot-menu">
         <div className="aHeader-wrapper">
           <div className="aHeader-left" onClick={() => navigate("/user")}>
@@ -78,7 +79,11 @@ const FooterMenu = () => {
           <div className="aHeader-right">
             {/* Danh sách icon */}
             {[
-              { icon: "fa-tachograph-digital", text: "Dashboard", link: "/" },
+              {
+                icon: "fa-tachograph-digital",
+                text: "Dashboard",
+                link: "/dashboard",
+              },
               { icon: "fa-house", text: "Trang chủ", link: "/" },
               { icon: "fa-dice", text: "Games", link: "/" },
             ].map((item, index) => (
@@ -106,7 +111,7 @@ const FooterMenu = () => {
         </div>
         {tooltip && <div className="tooltip">{tooltip}</div>}
       </div>
-    </>
+    </div>
   );
 };
 

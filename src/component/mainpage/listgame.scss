@@ -11,44 +11,38 @@
       display: flex;
       flex-direction: row;
       gap: 30px;
+      .game-item {
+        border-radius: 10px;
+        width: 100%;
+        cursor: pointer;
+        img {
+          width: 100%;
+          z-index: 1;
+        }
+      }
     }
   }
 }
 .listgame-title {
   color: white;
-  margin: 10px 0;
-  background: linear-gradient(to right, rgb(1, 38, 94), transparent) ;
-  border-left: 5px solid red;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding-left: 10px;
+  justify-content: center;
+  padding: 10px 0px;
 }
 .style-title {
   color: #f8fdff;
   font-weight: bold;
 }
 
-.game-item {
-  position: relative;
-  width: 148px;
-  height: 186px;
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px rgba(0,0,0,.7);
-  cursor: pointer;
-  img {
-    z-index: 1;
-  }
-}
-
 .game-container {
   width: 100vw;
   height: 100vh;
-  position:fixed;
+  position: fixed;
   top: 0px;
   left: 0px;
-  background: rgba(0,0,0,.7);
-  z-index: 1000;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 100;
 }
 
 @keyframes glow {
@@ -76,6 +70,34 @@
   background: #2e2e2e;
 }
 
+.email-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+}
+.email-modal-buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.close-btn {
+  background: #ccc;
+  color: black;
+}
+
 @media (max-width: 768px) {
   .listgame-container {
     width: 100vw;
@@ -86,15 +108,13 @@
   marquee {
     font-size: 15px;
   }
-  .listgame-title {
-    padding-top: 10px;
-  }
+
   .listgame-items {
     width: 90vw;
     display: flex;
     justify-content: center;
     .game-item-wraper {
-      display: grid!important;
+      display: grid !important;
       grid-template-columns: repeat(2, 2fr);
     }
   }
