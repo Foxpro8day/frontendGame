@@ -184,21 +184,37 @@ const Listgame = () => {
 
     try {
       setIsSubmittingEmail(true);
-      await axios.post(`${desUrl}/user/email-login`, { email: emailInput });
 
-      // Đợi cookie từ server (must be same-origin or withCredentials)
-      const response = await axios.get("/user/me", { withCredentials: true });
-      setUser(response.data);
-      setIsLoggedIn(true);
-      setIsLoginGateOpen(false); // ✅ Cho phép chơi game
-      toast.success("Đăng nhập thành công!");
+      await axios.post(
+        `${desUrl}/user/email-login`,
+        { email: emailInput },
+        {
+          withCredentials: true,
+        }
+      );
+
+      // Chờ cookie được lưu, sau đó gọi lại để xác nhận user
+      const res = await axios.get(`${desUrl}/user/me`, {
+        withCredentials: true,
+      });
+
+      if (res.data && res.data.username) {
+        setUser(res.data);
+        setIsLoggedIn(true);
+        setIsLoginGateOpen(false);
+        toast.success("Đăng nhập thành công!");
+      } else {
+        toast.error("Không nhận được thông tin người dùng.");
+      }
     } catch (error) {
+      console.error("❌ Email login failed:", error);
       toast.error("Email không hợp lệ hoặc lỗi server.");
     } finally {
       setIsSubmittingEmail(false);
     }
   };
   
+
   return (
     <div className="listgame-container d-flex justify-content-center">
       <div className="listgame-wrapper mt-3">
@@ -284,7 +300,7 @@ const Listgame = () => {
             <GameLoader onReady={() => setIsLoaded(true)} />
           ) : (
             <div
-              className="game-container"
+              className="game-container1"
               style={{
                 pointerEvents: isLoginGateOpen ? "none" : "auto",
                 filter: isLoginGateOpen ? "blur(4px)" : "none",
