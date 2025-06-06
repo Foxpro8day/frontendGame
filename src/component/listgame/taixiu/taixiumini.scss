@@ -3,6 +3,31 @@
   // animation: aura-shrink 1s ease-in-out infinite; /* Lặp vô hạn */
 }
 
+.user-wrapper {
+  position: absolute;
+  top: 510px;
+  left: 14px;
+  width: 400px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  // border: 1px solid #fff;
+  .user-info {
+    img {
+      border-radius: 50%;
+      width: 80px;
+      margin-right: 5px;
+
+    }   
+  }
+  .user-balance {
+    font-size: 16px;
+    color: #fff;
+    margin-left: 10px;
+  }
+}
+
 @keyframes aura-shrink {
   0% {
     transform: scale(1) rotate(0deg); /* Kích thước ban đầu */

@@ -1,8 +1,32 @@
 import buttonImg from "../assets/images/buttons.webp";
 import chibiImg from "../assets/images/chibi.webp";
 import otherImg from "../assets/images/other.webp";
+import userInfo from "../assets/images/user-info.png";
 import "./gOther.scss";
 
+//user info
+const UserInfo = (props) => {
+  const imgPos = { x: 30, y: 180, width: 300, height: 120 };
+
+  return (
+    <>
+      <div
+        className="user-info"
+        style={{
+          position: "absolute",
+          top: props.top,
+          left: props.left,
+          backgroundImage: `url(${userInfo})`,
+          backgroundPosition: `-${imgPos.x}px -${imgPos.y}px`,
+          width: `${imgPos.width}px`,
+          height: `${imgPos.height}px`,
+        }}
+      >
+        <div className="user-info-text">{props.text}</div>
+      </div>
+    </>
+  );
+};
 // button blue
 const ButtonBlue = (props) => {
   const imgPos = { x: 10, y: 147, width: 234, height: 100 };
@@ -139,7 +163,6 @@ const BgInsImg = (props) => {
     </>
   );
 };
-
 // nội dung hướng dẫn: tùy trò
 const ContentInsTX = (props) => {
   return (
@@ -428,7 +451,6 @@ const ContentInsBC = (props) => {
     </div>
   );
 };
-
 // khung giây đếm ngược
 const TimerImg = (props) => {
   const imgPos = { x: 453, y: 68, width: 90, height: 90 };
@@ -504,7 +526,6 @@ const ChatFnBgImg = (props) => {
     </>
   );
 };
-
 const ChatInfoImg = (props) => {
   const imgPos = { x: 575, y: 80, width: 252, height: 55 };
 
@@ -576,7 +597,6 @@ const ReplayImg = (props) => {
     </>
   );
 };
-
 const ChibiImg = (props) => {
   return (
     <div
@@ -744,6 +764,7 @@ const HistoryIcon = (props) => {
   );
 };
 export {
+  UserInfo,
   BeginImg,
   BgInsImg,
   ButtonBlue,

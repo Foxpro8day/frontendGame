@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import musicOffImg from "../../assets/images/music-off.svg";
 import musicOnImg from "../../assets/images/music-on.svg";
 import {
+  UserInfo,
   BgInsImg,
   ChatInfoImg,
   ChibiImg,
@@ -33,12 +34,13 @@ import {
   XiuIcon,
 } from "../../graphic/gTaiXiu";
 import { XdI, XdX } from "../../graphic/gXocDia";
-
+import avatar from "../../assets/images/fox.jpg";
 import socket from "../../socket/socket";
 import LogicDice from "../../utils/diceLogic";
 import { SoundContext } from "../../utils/soundEffect";
 import DiceRoller from "./flipDices";
 import "./taixiumini.scss";
+import { AuthContext } from "../../Context/AuthContext";
 
 const TaixiuMini = ({ title, onClose }) => {
   const [selectedBet, setSelectedBet] = useState(null); // "Tài" hoặc "Xỉu"
@@ -60,17 +62,13 @@ const TaixiuMini = ({ title, onClose }) => {
     2: "Hết giờ đặt cược",
     3: "Ván mới bắt đầu trong...",
   };
+  const { user } = useContext(AuthContext);
 
-  // Tạo các cờ để đảm bảo âm thanh chỉ phát một lần
-  // const hasPlayed = useRef({
-  //   begin: false,
-  //   clock: false,
-  //   plate: false,
-  //   flying: false,
-  //   inBowl: false,
-  //   win: false,
-  //   lose: false,
-  // });
+  useEffect(() => {
+    if (user) {
+      console.log("👤 User hiện tại:", user);
+    }
+  }, [user]);
 
   useEffect(() => {
     if (!isSoundOn) return;
@@ -220,10 +218,6 @@ const TaixiuMini = ({ title, onClose }) => {
     };
   }, []);
 
-  // const [key, setKey] = useState(0); // State để trigger re-render
-  // const rerenderDice = () => {
-  //   setKey((prevKey) => prevKey + 1); // Tăng key để ép component re-render
-  // };
   const handleClose = () => {
     onClose();
     stopSound("bgSound");
@@ -251,11 +245,11 @@ const TaixiuMini = ({ title, onClose }) => {
         textMoneyRight={moneyTai?.toLocaleString("vi-VN") || 0}
       />
       {/* <DeckTitle /> */}
-      <Tree />
-      <Lantern />
-      <Flower />
-      <Cloud />
-      <RedEvt />
+      {/* <Tree /> */}
+      {/* <Lantern /> */}
+      {/* <Flower /> */}
+      {/* <Cloud /> */}
+      {/* <RedEvt /> */}
       <PointImg
         className="point"
         text={diceValues?.total || 3}
@@ -384,7 +378,28 @@ const TaixiuMini = ({ title, onClose }) => {
       )}
       <XdI top="60px" left="10px" onClick={handleIicon} />
       <XdX top="60px" right="10px" onClick={handleClose} />
-      <Cloud2 />
+      {/* <Cloud2 /> */}
+      <UserInfo top="500px" left="0px" />
+      {
+        <div className="user-wrapper">
+          <div className="user-info">
+            <img
+              src={user?.avatar || avatar} // avatar là ảnh mặc định đã import sẵn
+              alt="Avatar"
+              onError={(e) => {
+                e.target.onerror = null; // Ngăn vòng lặp nếu ảnh fallback cũng lỗi
+                e.target.src = avatar; // Gán ảnh mặc định nếu ảnh chính lỗi
+              }}
+            />
+          </div>
+          <div className="user-balance">
+            <div className="username">{user?.username || "Khách"}</div>
+            <div>Balance:{" "}
+              {user?.balance ? user.balance.toLocaleString("vi-VN") : 0} VND
+            </div>
+          </div>
+        </div>
+      }
     </div>
   );
 };
